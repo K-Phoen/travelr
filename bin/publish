@@ -1,24 +1,23 @@
 #!/usr/bin/env bash
 
-TMP_DIR=/tmp/travelr
-
+make deps
 make permissions
 
 echo -e '\e[32m→ Stashing modified/untracked files\e[0m'
 git stash -u
 
 echo -e '\e[32m→ Building…\e[0m'
-make build
-
-echo -e '\e[32m→ Preparing publication\e[0m'
-rm -rf $TMP_DIR
-mkdir $TMP_DIR
-cp -R web $TMP_DIR
+make release
 
 echo -e '\e[32m→ Switching back to gh-pages\e[0m'
 git checkout gh-pages
 
-mv $TMP_DIR/* .
+echo '.env' > .gitignore
+echo 'vendor' >> .gitignore
+echo 'node_modules' >> .gitignore
+echo 'web' >> .gitignore
+
+cp -R web/* .
 git add .
 git commit -m "Publish (`date`)"
 
@@ -33,4 +32,3 @@ git checkout master
 git stash apply
 
 echo -e '\e[32m→ Cleaning temp directory\e[0m'
-rm -rf $TMP_DIR

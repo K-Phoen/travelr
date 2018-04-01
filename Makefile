@@ -1,5 +1,8 @@
 .PHONY: build
 
+permissions:
+	docker run -it -v $(shell pwd):/usr/src/app -w /usr/src/app --rm node:9 chown -R $(shell id -u):$(shell id -g) web/ node_modules
+
 deps: vendor/autoload.php npm
 
 # we only do `install`, as composer.json may change
@@ -17,9 +20,16 @@ vendor/autoload.php: composer.lock
 
 npm:
 	docker run -it -v $(shell pwd):/usr/src/app -w /usr/src/app --rm node:9 npm install
+	docker run -it -v $(shell pwd):/usr/src/app -w /usr/src/app --rm node:9 chown -R $(shell id -u):$(shell id -g) node_modules/
 
 build:
 	docker run -it -v $(shell pwd):/usr/src/app -w /usr/src/app --rm node:9 npm run build
+	docker run -it -v $(shell pwd):/usr/src/app -w /usr/src/app --rm node:9 chown -R $(shell id -u):$(shell id -g) web/
+	./bin/travelr build
+
+release:
+	docker run -it -v $(shell pwd):/usr/src/app -w /usr/src/app --rm node:9 npm run package
+	docker run -it -v $(shell pwd):/usr/src/app -w /usr/src/app --rm node:9 chown -R $(shell id -u):$(shell id -g) web/
 	./bin/travelr build
 
 serve:
