@@ -1,0 +1,25 @@
+@import '~bootstrap/scss/bootstrap';
+@import '~leaflet/dist/leaflet.css';
+@import '~leaflet.markercluster/dist/MarkerCluster.css';
+@import 'Leaflet.Photo.css';
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+  left: 0;
+  position: relative;
+  top: 0;
+}
+
+.navbar {
+  background-color: rgba(0,0,0,.7);
+}
+
+.leaflet-marker-photo b {
+  line-height: 8px;
+}

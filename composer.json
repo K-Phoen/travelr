@@ -1,0 +1,28 @@
+{
+    "name": "kphoen/travelr",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kévin Gomez",
+            "email": "contact@kevingomez.fr"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Travelr\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^7.1",
+        "ext-gd": "*",
+
+        "mnapoli/silly": "^1.7",
+        "symfony/yaml": "^4.0",
+        "symfony/finder": "^4.0",
+        "pimple/pimple": "^3.2",
+        "intervention/image": "^2.4",
+        "twig/twig": "^2.4",
+        "vlucas/phpdotenv": "^2.4"
+    }
+}
