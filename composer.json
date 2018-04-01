@@ -23,6 +23,7 @@
         "pimple/pimple": "^3.2",
         "intervention/image": "^2.4",
         "twig/twig": "^2.4",
-        "vlucas/phpdotenv": "^2.4"
+        "vlucas/phpdotenv": "^2.4",
+        "symfony/filesystem": "^4.0"
     }
 }

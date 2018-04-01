@@ -29,7 +29,7 @@ class AlbumsToJson
 
         foreach ($this->albumsRepo->findAll() as $album) {
             $thumbnail = $this->thumbnailer->forImage($album->cover());
-            $relativeDir = rtrim(str_replace($this->webDirectory, '', $album->directory()), '/');
+            $relativeDir = rtrim(str_replace($this->webDirectory, '', $thumbnail->directory()), '/');
 
             $albumsData[] = [
                 'slug' => $album->slug(),
