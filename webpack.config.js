@@ -13,7 +13,8 @@ Encore
     // allow sass/scss files to be processed
     .enableSassLoader()
 
-    .addStyleEntry('global', './assets/css/global.scss')
+    .addStyleEntry('map', './assets/css/map.scss')
+    .addStyleEntry('album', './assets/css/album.scss')
 
     .enableSourceMaps(!Encore.isProduction())
 

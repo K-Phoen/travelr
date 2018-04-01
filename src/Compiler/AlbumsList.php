@@ -36,6 +36,7 @@ class AlbumsList
             $relativeDir = rtrim(str_replace($this->webDirectory, '', $album->directory()), '/');
 
             $albumsData[] = [
+                'slug' => $album->slug(),
                 'title' => $album->title(),
                 'description' => $album->description(),
                 'thumbnail' => $relativeDir.'/'.$thumbnail->filename(),

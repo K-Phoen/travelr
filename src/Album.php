@@ -13,6 +13,9 @@ class Album
     /** @var Image */
     private $cover;
 
+    /** @var Image[] */
+    private $images = [];
+
     /** @var float */
     private $latitude;
 
@@ -36,9 +39,24 @@ class Album
         return $album;
     }
 
+    public function withImages(iterable $images): Album
+    {
+        $album = clone $this;
+        $album->images = $images;
+
+        return $album;
+    }
+
     public function title(): string
     {
         return $this->title;
+    }
+
+    public function slug(): string
+    {
+        $parts = explode('/', $this->directory);
+
+        return end($parts);
     }
 
     public function description(): string
@@ -64,5 +82,13 @@ class Album
     public function directory(): string
     {
         return $this->directory;
+    }
+
+    /**
+     * @return iterable|Image[]
+     */
+    public function images(): iterable
+    {
+        return $this->images;
     }
 }

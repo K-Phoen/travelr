@@ -52,7 +52,9 @@ class Container extends Pimple
     {
         $loader = new \Twig_Loader_Filesystem($this['views_dir']);
 
-        $this['twig'] = new \Twig_Environment($loader);
+        $this['twig'] = new \Twig_Environment($loader, [
+            'strict_variables' => true,
+        ]);
         $this['twig']->addGlobal('MAP_ACCESS_TOKEN', $_ENV['MAP_ACCESS_TOKEN']);
     }
 
@@ -70,6 +72,10 @@ class Container extends Pimple
         $this[Compiler\MapView::class] = function ($c) {
             return new Compiler\MapView($c['twig'], $c['web_dir'].'/index.html');
         };
+
+        $this[Compiler\AlbumView::class] = function ($c) {
+            return new Compiler\AlbumView($c['twig']);
+        };
     }
 
     private function commands(): void
@@ -83,7 +89,11 @@ class Container extends Pimple
         };
 
         $this[Command\CompileHtml::class] = function ($c) {
-            return new Command\CompileHtml($c[Compiler\MapView::class]);
+            return new Command\CompileHtml(
+                $c[Albums::class],
+                $c[Compiler\MapView::class],
+                $c[Compiler\AlbumView::class]
+            );
         };
     }
 }

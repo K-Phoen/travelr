@@ -4,11 +4,13 @@ namespace Travelr\Repository;
 
 use Symfony\Component\Finder\Finder;
 use Travelr\Album;
+use Travelr\Image;
 use Travelr\Metadata\AlbumReader;
 
 class Albums
 {
     private const ALBUM_DESCRIPTOR_FILENAME = 'album.yaml';
+    private const ALLOWED_EXTENSIONS = ['jpg', 'jpeg', 'png'];
 
     /** @var string */
     private $rootDirectory;
@@ -35,7 +37,27 @@ class Albums
             ->in($this->rootDirectory);
 
         foreach ($finder as $file) {
-            yield $this->albumReader->read($file->getRealPath());
+            $album = $this->albumReader->read($file->getRealPath());
+
+            yield $album->withImages($this->imagesPaths($album));
+        }
+    }
+
+    private function imagesPaths(Album $album): iterable
+    {
+        $finder = new Finder();
+        $finder
+            ->files()
+            ->filter(function (\SplFileInfo $fileInfo) {
+                $extension = strtolower($fileInfo->getExtension());
+
+                return \in_array($extension, self::ALLOWED_EXTENSIONS, true);
+            })
+            ->depth(0)
+            ->in($album->directory());
+
+        foreach ($finder as $file) {
+            yield Image::fromPath($file->getRealPath());
         }
     }
 }

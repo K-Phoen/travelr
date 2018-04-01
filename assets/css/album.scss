@@ -1,0 +1,14 @@
+@import '~bootstrap/scss/bootstrap';
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+.album {
+  margin-top: 3rem;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
