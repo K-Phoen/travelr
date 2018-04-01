@@ -4,7 +4,7 @@ namespace Travelr\Compiler;
 
 use Travelr\Album;
 
-class AlbumView
+class GalleryView
 {
     /** @var \Twig_Environment */
     private $twig;

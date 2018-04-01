@@ -60,21 +60,20 @@ class Container extends Pimple
 
     private function compilers(): void
     {
-        $this[Compiler\AlbumsList::class] = function ($c) {
-            return new Compiler\AlbumsList(
+        $this[Compiler\AlbumsToJson::class] = function ($c) {
+            return new Compiler\AlbumsToJson(
                 $c[Albums::class],
                 $c[Thumbnail\Intervention::class],
-                $c['web_dir'],
-                $c['web_dir'].'/albums.json'
+                $c['web_dir']
             );
         };
 
-        $this[Compiler\MapView::class] = function ($c) {
-            return new Compiler\MapView($c['twig'], $c['web_dir'].'/index.html');
+        $this[Compiler\AlbumsMapView::class] = function ($c) {
+            return new Compiler\AlbumsMapView($c['twig']);
         };
 
-        $this[Compiler\AlbumView::class] = function ($c) {
-            return new Compiler\AlbumView($c['twig']);
+        $this[Compiler\GalleryView::class] = function ($c) {
+            return new Compiler\GalleryView($c['twig']);
         };
     }
 
@@ -84,15 +83,18 @@ class Container extends Pimple
             return new Command\ListAlbums($c[Albums::class]);
         };
 
-        $this[Command\CompileAlbums::class] = function ($c) {
-            return new Command\CompileAlbums($c[Compiler\AlbumsList::class]);
+        $this[Command\BuildAlbumsMapView::class] = function ($c) {
+            return new Command\BuildAlbumsMapView($c[Compiler\AlbumsMapView::class]);
         };
 
-        $this[Command\CompileHtml::class] = function ($c) {
-            return new Command\CompileHtml(
+        $this[Command\AlbumsToJson::class] = function ($c) {
+            return new Command\AlbumsToJson($c[Compiler\AlbumsToJson::class]);
+        };
+
+        $this[Command\BuildGalleries::class] = function ($c) {
+            return new Command\BuildGalleries(
                 $c[Albums::class],
-                $c[Compiler\MapView::class],
-                $c[Compiler\AlbumView::class]
+                $c[Compiler\GalleryView::class]
             );
         };
     }

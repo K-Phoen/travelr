@@ -5,7 +5,7 @@ namespace Travelr\Compiler;
 use Travelr\Repository\Albums;
 use Travelr\Thumbnail\Thumbnailer;
 
-class AlbumsList
+class AlbumsToJson
 {
     /** @var Albums */
     private $albumsRepo;
@@ -16,18 +16,14 @@ class AlbumsList
     /** @var string */
     private $webDirectory;
 
-    /** @var string */
-    private $destinationFile;
-
-    public function __construct(Albums $albumsRepo, Thumbnailer $thumbnailer, string $webDirectory, string $destinationFile)
+    public function __construct(Albums $albumsRepo, Thumbnailer $thumbnailer, string $webDirectory)
     {
         $this->albumsRepo = $albumsRepo;
         $this->thumbnailer = $thumbnailer;
         $this->webDirectory = $webDirectory;
-        $this->destinationFile = $destinationFile;
     }
 
-    public function compile(): void
+    public function compile(string $destinationFile): void
     {
         $albumsData = [];
 
@@ -45,6 +41,6 @@ class AlbumsList
             ];
         }
 
-        file_put_contents($this->destinationFile, json_encode($albumsData, JSON_PRETTY_PRINT));
+        file_put_contents($destinationFile, json_encode($albumsData, JSON_PRETTY_PRINT));
     }
 }

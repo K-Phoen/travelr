@@ -13,18 +13,35 @@ use Pimple\Psr11\Container as Psr11Container;
 $dotenv = new Dotenv\Dotenv(__DIR__.'/../');
 $dotenv->load();
 
+$container = new Container();
+
 $app = new Application();
-$app->useContainer(new Psr11Container(new Container()));
+$app->useContainer(new Psr11Container($container));
 
 $app
     ->command('albums:list', [Command\ListAlbums::class, 'run'])
     ->descriptions('List available albums.');
 
-$app->command('albums:compile', [Command\CompileAlbums::class, 'run']);
-$app->command('html:compile', [Command\CompileHtml::class, 'run']);
-$app->command('build', function (OutputInterface $output) use ($app) {
-    $app->runCommand('albums:compile', $output);
-    $app->runCommand('html:compile', $output);
-});
+$app
+    ->command('build:albums:json [destination]', function (string $destination, OutputInterface $output) use ($container) {
+        $container[Command\AlbumsToJson::class]->run($destination, $output);
+    })
+    ->defaults(['destination' => $container['web_dir'].'/albums.json']);
+
+$app
+    ->command('build:albums:map [destination]', function (string $destination, OutputInterface $output) use ($container) {
+        $container[Command\BuildAlbumsMapView::class]->run($destination, $output);
+    })
+    ->defaults(['destination' => $container['web_dir'].'/index.html']);
+
+$app->command('build:albums:galleries', [Command\BuildGalleries::class, 'run']);
+
+$app
+    ->command('build', function (OutputInterface $output) use ($app) {
+        $app->runCommand('build:albums:json', $output);
+        $app->runCommand('build:albums:map', $output);
+        $app->runCommand('build:albums:galleries', $output);
+    })
+    ->descriptions('Builds the map and galleries.');
 
 $app->run();
