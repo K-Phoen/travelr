@@ -14,7 +14,6 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 map.zoomControl.setPosition('bottomright');
 
 const photoLayer = L.photo.cluster().on('click', function (evt) {
-    console.log(evt.layer.photo);
     evt.layer.bindPopup(L.Util.template('<a href="data/{slug}/"><img src="{url}"/><h3>{title}</h3></a><p>{caption}</p>', evt.layer.photo), {
         className: 'leaflet-popup-photo',
         minWidth: 400
