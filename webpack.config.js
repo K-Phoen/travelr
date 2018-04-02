@@ -9,12 +9,13 @@ Encore
 
     // will create public/build/app.js and public/build/app.css
     .addEntry('app', './assets/js/app.js')
+    .addEntry('album', './assets/js/album.js')
 
     // allow sass/scss files to be processed
     .enableSassLoader()
 
     .addStyleEntry('map', './assets/css/map.scss')
-    .addStyleEntry('album', './assets/css/album.scss')
+    .addStyleEntry('gallery', './assets/css/album.scss')
 
     .enableSourceMaps(!Encore.isProduction())
 
