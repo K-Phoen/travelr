@@ -23,12 +23,12 @@ class BuildGalleries
         $this->galleryViewCompiler = $galleryViewCompiler;
     }
 
-    public function run(OutputInterface $output): void
+    public function run(string $webRoot, OutputInterface $output): void
     {
         $output->writeln('<info>Compiling galleries...</info>');
 
         /** @var Album $album */
-        foreach ($this->albumsRepo->findAll() as $album) {
+        foreach ($this->albumsRepo->findAll($webRoot) as $album) {
             $this->galleryViewCompiler->compile($album);
         }
 

@@ -4,44 +4,10 @@
 require __DIR__.'/../vendor/autoload.php';
 
 use Travelr\Cli\Application;
-use Travelr\Cli\Command;
 use Travelr\Cli\Container;
-
-use Symfony\Component\Console\Output\OutputInterface;
-use Pimple\Psr11\Container as Psr11Container;
 
 $dotenv = new Dotenv\Dotenv(__DIR__.'/../');
 $dotenv->load();
 
-$container = new Container();
-
-$app = new Application();
-$app->useContainer(new Psr11Container($container));
-
-$app
-    ->command('directories:list', [Command\ListDirectories::class, 'run'])
-    ->descriptions('List available directories.');
-
-$app
-    ->command('build:albums:json [destination]', function (string $destination, OutputInterface $output) use ($container) {
-        $container[Command\AlbumsToJson::class]->run($destination, $output);
-    })
-    ->defaults(['destination' => $container['web_dir'].'/albums.json']);
-
-$app
-    ->command('build:albums:map [destination]', function (string $destination, OutputInterface $output) use ($container) {
-        $container[Command\BuildAlbumsMapView::class]->run($destination, $output);
-    })
-    ->defaults(['destination' => $container['web_dir'].'/index.html']);
-
-$app->command('build:albums:galleries', [Command\BuildGalleries::class, 'run']);
-
-$app
-    ->command('build', function (OutputInterface $output) use ($app) {
-        $app->runCommand('build:albums:json', $output);
-        $app->runCommand('build:albums:map', $output);
-        $app->runCommand('build:albums:galleries', $output);
-    })
-    ->descriptions('Builds the map and galleries.');
-
+$app = new Application(new Container());
 $app->run();

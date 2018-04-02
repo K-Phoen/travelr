@@ -13,34 +13,34 @@ class Directories
     private const CONFIG_FILENAME = 'config.yaml';
     private const ALLOWED_EXTENSIONS = ['jpg', 'jpeg', 'png'];
 
-    /** @var string */
-    private $rootDirectory;
-
     /** @var Parser */
     private $configParser;
 
-    public function __construct(string $rootDirectory, Parser $configParser)
+    public function __construct(Parser $configParser)
     {
-        $this->rootDirectory = $rootDirectory;
         $this->configParser = $configParser;
     }
 
     /**
      * @return \Generator|Directory[]
      */
-    public function findAll(): \Generator
+    public function findAll(string $webRoot): \Generator
     {
         $finder = new Finder();
         $finder
             ->files()
             ->name(self::CONFIG_FILENAME)
             ->depth(1)
-            ->in($this->rootDirectory);
+            ->in($webRoot.'/data');
 
         foreach ($finder as $configFile) {
             $directoryConfig = $this->configParser->read($configFile->getRealPath());
 
-            yield new Directory($configFile->getPath(), $directoryConfig, $this->imagesPaths($configFile->getPath()));
+            yield new Directory(
+                \dirname($configFile->getRealPath()),
+                $directoryConfig,
+                $this->imagesPaths($configFile->getPath())
+            );
         }
     }
 

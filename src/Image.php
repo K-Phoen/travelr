@@ -30,6 +30,8 @@ final class Image
 
     public function relativeTo(string $directory): Image
     {
+        $directory = \realpath($directory);
+
         return new static(
             trim(str_replace($directory, '', $this->path), '/'),
             trim(str_replace($directory, '', $this->thumbnailPath), '/')

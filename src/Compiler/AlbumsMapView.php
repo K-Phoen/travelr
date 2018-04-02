@@ -14,10 +14,10 @@ class AlbumsMapView
         $this->twig = $twig;
     }
 
-    public function compile(string $destinationFile): void
+    public function compile(string $webRoot): void
     {
         $html = $this->twig->render('index.html.twig');
 
-        file_put_contents($destinationFile, $html);
+        file_put_contents($webRoot.'/index.html', $html);
     }
 }

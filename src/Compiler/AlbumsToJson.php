@@ -11,30 +11,26 @@ class AlbumsToJson
     /** @var Albums */
     private $albumsRepo;
 
-    /** @var string */
-    private $webDirectory;
-
-    public function __construct(Albums $albumsRepo, string $webDirectory)
+    public function __construct(Albums $albumsRepo)
     {
         $this->albumsRepo = $albumsRepo;
-        $this->webDirectory = $webDirectory;
     }
 
-    public function compile(string $destinationFile): void
+    public function compile(string $webRoot): void
     {
         $albumsData = [];
 
-        foreach ($this->albumsRepo->findAll() as $album) {
+        foreach ($this->albumsRepo->findAll($webRoot) as $album) {
             $albumsData[] = [
                 'slug' => $album->slug(),
                 'title' => $album->title(),
                 'description' => $album->description(),
-                'thumbnail' => $album->cover()->relativeTo($this->webDirectory)->thumbnailPath(),
+                'thumbnail' => $album->cover()->relativeTo($webRoot)->thumbnailPath(),
                 'latitude' => $album->latitude(),
                 'longitude' => $album->longitude(),
             ];
         }
 
-        file_put_contents($destinationFile, json_encode($albumsData, JSON_PRETTY_PRINT));
+        file_put_contents($webRoot.'/albums.json', json_encode($albumsData, JSON_PRETTY_PRINT));
     }
 }

@@ -24,7 +24,8 @@ class Container extends Pimple
 
     private function configure(): void
     {
-        $this->directories();
+        $this['views_dir'] = dirname(__DIR__, 2) . '/views/';
+
         $this->templating();
         $this->geocoder();
         $this->compilers();
@@ -39,7 +40,7 @@ class Container extends Pimple
         };
 
         $this[Directories::class] = function ($c) {
-            return new Directories($c['data_dir'],  $c[ConfigParser::class]);
+            return new Directories($c[ConfigParser::class]);
         };
 
         $this[Thumbnail\KeepOriginal::class] = function () {
@@ -49,13 +50,6 @@ class Container extends Pimple
         $this[Thumbnail\Intervention::class] = function () {
             return new Thumbnail\Intervention();
         };
-    }
-
-    private function directories(): void
-    {
-        $this['data_dir'] = realpath(__DIR__.'/../../web/data/');
-        $this['web_dir'] = realpath(__DIR__.'/../../web/');
-        $this['views_dir'] = realpath(__DIR__.'/../../views/');
     }
 
     private function geocoder(): void
@@ -81,7 +75,7 @@ class Container extends Pimple
     private function compilers(): void
     {
         $this[Compiler\AlbumsToJson::class] = function ($c) {
-            return new Compiler\AlbumsToJson($c[Albums::class], $this['web_dir']);
+            return new Compiler\AlbumsToJson($c[Albums::class]);
         };
 
         $this[Compiler\AlbumsMapView::class] = function ($c) {

@@ -17,11 +17,11 @@ class AlbumsToJson
         $this->albumsListCompiler = $albumsListCompiler;
     }
 
-    public function run(string $destinationFile, OutputInterface $output): void
+    public function run(string $webRoot, OutputInterface $output): void
     {
         $output->writeln('<info>Compiling albums...</info>');
 
-        $this->albumsListCompiler->compile($destinationFile);
+        $this->albumsListCompiler->compile($webRoot);
 
         $output->writeln('Done.');
     }
