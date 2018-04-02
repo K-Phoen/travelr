@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Travelr\Cli;
 
 use Pimple\Container as Pimple;
 use Travelr\Repository\Albums;
-use Travelr\Metadata\AlbumReader;
+use Travelr\Config\Parser as ConfigParser;
+use Travelr\Repository\Directories;
 use Travelr\Thumbnail;
 use Travelr\Compiler;
 
@@ -24,12 +27,16 @@ class Container extends Pimple
         $this->compilers();
         $this->commands();
 
-        $this[AlbumReader::class] = function () {
-            return new AlbumReader();
+        $this[ConfigParser::class] = function () {
+            return new ConfigParser();
         };
 
         $this[Albums::class] = function ($c) {
-            return new Albums($c['data_dir'],  $c[AlbumReader::class]);
+            return new Albums($c[Directories::class], $c[Thumbnail\Intervention::class]);
+        };
+
+        $this[Directories::class] = function ($c) {
+            return new Directories($c['data_dir'],  $c[ConfigParser::class]);
         };
 
         $this[Thumbnail\KeepOriginal::class] = function () {
@@ -61,11 +68,7 @@ class Container extends Pimple
     private function compilers(): void
     {
         $this[Compiler\AlbumsToJson::class] = function ($c) {
-            return new Compiler\AlbumsToJson(
-                $c[Albums::class],
-                $c[Thumbnail\Intervention::class],
-                $c['web_dir']
-            );
+            return new Compiler\AlbumsToJson($c[Albums::class], $this['web_dir']);
         };
 
         $this[Compiler\AlbumsMapView::class] = function ($c) {
@@ -79,8 +82,8 @@ class Container extends Pimple
 
     private function commands(): void
     {
-        $this[Command\ListAlbums::class] = function ($c) {
-            return new Command\ListAlbums($c[Albums::class]);
+        $this[Command\ListDirectories::class] = function ($c) {
+            return new Command\ListDirectories($c[Directories::class]);
         };
 
         $this[Command\BuildAlbumsMapView::class] = function ($c) {
@@ -92,10 +95,7 @@ class Container extends Pimple
         };
 
         $this[Command\BuildGalleries::class] = function ($c) {
-            return new Command\BuildGalleries(
-                $c[Albums::class],
-                $c[Compiler\GalleryView::class]
-            );
+            return new Command\BuildGalleries($c[Albums::class], $c[Compiler\GalleryView::class]);
         };
     }
 }

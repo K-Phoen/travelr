@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Travelr\Cli\Command;
 
 use Symfony\Component\Console\Output\OutputInterface;
@@ -10,9 +12,9 @@ class AlbumsToJson
     /** @var AlbumsToJsonCompiler */
     private $albumsListCompiler;
 
-    public function __construct(AlbumsToJsonCompiler $albumslistCompiler)
+    public function __construct(AlbumsToJsonCompiler $albumsListCompiler)
     {
-        $this->albumsListCompiler = $albumslistCompiler;
+        $this->albumsListCompiler = $albumsListCompiler;
     }
 
     public function run(string $destinationFile, OutputInterface $output): void

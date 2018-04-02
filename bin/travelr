@@ -19,8 +19,8 @@ $app = new Application();
 $app->useContainer(new Psr11Container($container));
 
 $app
-    ->command('albums:list', [Command\ListAlbums::class, 'run'])
-    ->descriptions('List available albums.');
+    ->command('directories:list', [Command\ListDirectories::class, 'run'])
+    ->descriptions('List available directories.');
 
 $app
     ->command('build:albums:json [destination]', function (string $destination, OutputInterface $output) use ($container) {

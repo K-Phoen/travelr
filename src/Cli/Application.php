@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Travelr\Cli;
 
 use Silly\Application as Silly;

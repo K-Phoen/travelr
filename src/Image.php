@@ -1,33 +1,49 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Travelr;
 
-class Image
+final class Image
 {
     /** @var string */
     private $path;
 
-    public static function fromPath(string $path): Image
+    /** @var string */
+    private $thumbnailPath;
+
+    public static function fromPath(string $path, string $thumbnailPath = null): Image
     {
-        $image = new static();
-
-        $image->path = $path;
-
-        return $image;
+        return new static($path, $thumbnailPath ?? $path);
     }
 
-    public static function thumbFrom(Image $source, string $prefix): Image
+    public static function thumbFrom(Image $source, string $thumbPrefix): Image
     {
-        $image = clone $source;
+        return static::fromPath($source->path(), $source->directory().'/'.$thumbPrefix.$source->filename());
+    }
 
-        $image->path = $source->directory().'/'.$prefix.$source->filename();
+    private function __construct(string $path, string $thumbnailPath)
+    {
+        $this->path = $path;
+        $this->thumbnailPath = $thumbnailPath;
+    }
 
-        return $image;
+    public function relativeTo(string $directory): Image
+    {
+        return new static(
+            trim(str_replace($directory, '', $this->path), '/'),
+            trim(str_replace($directory, '', $this->thumbnailPath), '/')
+        );
     }
 
     public function path(): string
     {
         return $this->path;
+    }
+
+    public function thumbnailPath(): string
+    {
+        return $this->thumbnailPath;
     }
 
     public function filename(): string

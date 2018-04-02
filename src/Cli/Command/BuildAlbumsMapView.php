@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Travelr\Cli\Command;
 
 use Symfony\Component\Console\Output\OutputInterface;

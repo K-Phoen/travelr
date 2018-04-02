@@ -1,27 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Travelr\Repository;
 
-use Symfony\Component\Finder\Finder;
 use Travelr\Album;
+use Travelr\Directory;
 use Travelr\Image;
-use Travelr\Metadata\AlbumReader;
+use Travelr\Thumbnail\Thumbnailer;
 
 class Albums
 {
-    private const ALBUM_DESCRIPTOR_FILENAME = 'album.yaml';
-    private const ALLOWED_EXTENSIONS = ['jpg', 'jpeg', 'png'];
+    /** @var Directories */
+    private $directoriesRepo;
 
-    /** @var string */
-    private $rootDirectory;
+    /** @var Thumbnailer */
+    private $thumbnailer;
 
-    /** @var AlbumReader */
-    private $albumReader;
-
-    public function __construct(string $rootDirectory, AlbumReader $albumReader)
+    public function __construct(Directories $directoriesRepo, Thumbnailer $thumbnailer)
     {
-        $this->rootDirectory = $rootDirectory;
-        $this->albumReader = $albumReader;
+        $this->directoriesRepo = $directoriesRepo;
+        $this->thumbnailer = $thumbnailer;
     }
 
     /**
@@ -29,35 +28,34 @@ class Albums
      */
     public function findAll(): \Generator
     {
-        $finder = new Finder();
-        $finder
-            ->files()
-            ->name(self::ALBUM_DESCRIPTOR_FILENAME)
-            ->depth(1)
-            ->in($this->rootDirectory);
-
-        foreach ($finder as $file) {
-            $album = $this->albumReader->read($file->getRealPath());
-
-            yield $album->withImages($this->imagesPaths($album));
+        foreach ($this->directoriesRepo->findAll() as $directory) {
+            yield $this->albumFromDirectory($directory);
         }
     }
 
-    private function imagesPaths(Album $album): iterable
+    private function albumFromDirectory(Directory $directory): Album
     {
-        $finder = new Finder();
-        $finder
-            ->files()
-            ->filter(function (\SplFileInfo $fileInfo) {
-                $extension = strtolower($fileInfo->getExtension());
+        $config = $directory->config();
 
-                return \in_array($extension, self::ALLOWED_EXTENSIONS, true);
-            })
-            ->depth(0)
-            ->in($album->directory());
+        return new Album(
+            $directory->path(),
+            $config->title(),
+            $config->description(),
+            $config->coordinates(),
+            $this->imageFromPath($directory->path().'/'.$config->cover()),
+            $this->imagesFromDirectory($directory)
+        );
+    }
 
-        foreach ($finder as $file) {
-            yield Image::fromPath($file->getRealPath());
+    private function imagesFromDirectory(Directory $directory): iterable
+    {
+        foreach ($directory->images() as $imagePath) {
+            yield $this->imageFromPath($imagePath);
         }
+    }
+
+    private function imageFromPath(string $path): Image
+    {
+        return $this->thumbnailer->forImage(Image::fromPath($path));
     }
 }

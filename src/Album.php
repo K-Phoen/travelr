@@ -1,9 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Travelr;
 
-class Album
+final class Album
 {
+    /** @var string */
+    private $path;
+
+    /** @var string */
+    private $slug;
+
     /** @var string */
     private $title;
 
@@ -13,38 +21,29 @@ class Album
     /** @var Image */
     private $cover;
 
-    /** @var Image[] */
-    private $images = [];
+    /** @var iterable|Image[] */
+    private $images;
 
-    /** @var float */
-    private $latitude;
+    /** @var Coordinates */
+    private $coordinates;
 
-    /** @var float */
-    private $longitude;
-
-    /** @var string */
-    private $directory;
-
-    public static function fromArray(array $data): Album
+    /**
+     * @param iterable|Image[] $images
+     */
+    public function __construct(string $path, string $title, string $description, Coordinates $coordinates, Image $cover, iterable $images)
     {
-        $album = new static();
-
-        $album->title = $data['title'];
-        $album->description = $data['description'] ?? '';
-        $album->directory = $data['directory'];
-        $album->cover = Image::fromPath($data['directory'].'/'.$data['cover']);
-        $album->latitude = (float) $data['latitude'];
-        $album->longitude = (float) $data['longitude'];
-
-        return $album;
+        $this->path = $path;
+        $this->slug = \basename($path);
+        $this->title = $title;
+        $this->description = $description;
+        $this->cover = $cover;
+        $this->images = $images;
+        $this->coordinates = $coordinates;
     }
 
-    public function withImages(iterable $images): Album
+    public function path(): string
     {
-        $album = clone $this;
-        $album->images = $images;
-
-        return $album;
+        return $this->path;
     }
 
     public function title(): string
@@ -54,9 +53,7 @@ class Album
 
     public function slug(): string
     {
-        $parts = explode('/', $this->directory);
-
-        return end($parts);
+        return $this->slug;
     }
 
     public function description(): string
@@ -71,17 +68,12 @@ class Album
 
     public function latitude(): float
     {
-        return $this->latitude;
+        return $this->coordinates->latitude();
     }
 
     public function longitude(): float
     {
-        return $this->longitude;
-    }
-
-    public function directory(): string
-    {
-        return $this->directory;
+        return $this->coordinates->longitude();
     }
 
     /**

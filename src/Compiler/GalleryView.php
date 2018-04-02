@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Travelr\Compiler;
 
 use Travelr\Album;
@@ -20,6 +22,6 @@ class GalleryView
             'album' => $album,
         ]);
 
-        file_put_contents($album->directory().'/index.html', $html);
+        file_put_contents($album->path().'/index.html', $html);
     }
 }

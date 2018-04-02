@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Travelr\Thumbnail;
 
 use Travelr\Image;

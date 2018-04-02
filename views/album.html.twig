@@ -39,8 +39,8 @@
                     <div class="grid col-12">
                         {% for image in album.images %}
                         <div class="grid-item">
-                            <a href="{{ image.filename }}">
-                                <img class="card-img-top" src="{{ image.filename }}" />
+                            <a href="{{ image.relativeTo(album.path).path }}">
+                                <img class="card-img-top" src="{{ image.relativeTo(album.path).thumbnailPath }}" />
                             </a>
                         </div>
                         {% endfor %}

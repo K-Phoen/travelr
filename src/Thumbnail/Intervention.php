@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Travelr\Thumbnail;
 
 use Intervention\Image\ImageManager;
@@ -24,12 +26,16 @@ class Intervention implements Thumbnailer
     {
         $thumb = Image::thumbFrom($image, 'travelr/thumb_');
 
-        $img = $this->manager->make($image->path());
-        $img->widen(400);
+        if ($this->fs->exists($thumb->thumbnailPath())) {
+            return $thumb;
+        }
 
         $this->fs->mkdir($thumb->directory());
 
-        $img->save($thumb->path());
+        $this->manager
+            ->make($image->path())
+            ->widen(400)
+            ->save($thumb->thumbnailPath());
 
         return $thumb;
     }
