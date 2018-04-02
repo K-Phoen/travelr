@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "1f87e2a5a928271d9a7d9b5b4734c422",
+    "content-hash": "0e503fb11246ef5040dc29b686f351d4",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -121,17 +121,17 @@
             "time": "2017-08-01T06:58:52+00:00"
         },
         {
-            "name": "geocoder-php/google-maps-provider",
-            "version": "4.2.0",
+            "name": "geocoder-php/nominatim-provider",
+            "version": "4.1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/geocoder-php/google-maps-provider.git",
-                "reference": "f5ce45372f705c1ce6338ae07b9fc7eb1a7bcb05"
+                "url": "https://github.com/geocoder-php/nominatim-provider.git",
+                "reference": "8f3dc10b1743cb5fc6bb38e84791d869d4e6f297"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/geocoder-php/google-maps-provider/zipball/f5ce45372f705c1ce6338ae07b9fc7eb1a7bcb05",
-                "reference": "f5ce45372f705c1ce6338ae07b9fc7eb1a7bcb05",
+                "url": "https://api.github.com/repos/geocoder-php/nominatim-provider/zipball/8f3dc10b1743cb5fc6bb38e84791d869d4e6f297",
+                "reference": "8f3dc10b1743cb5fc6bb38e84791d869d4e6f297",
                 "shasum": ""
             },
             "require": {
@@ -157,7 +157,7 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Geocoder\\Provider\\GoogleMaps\\": ""
+                    "Geocoder\\Provider\\Nominatim\\": ""
                 },
                 "exclude-from-classmap": [
                     "/Tests/"
@@ -169,13 +169,13 @@
             ],
             "authors": [
                 {
-                    "name": "William Durand",
+                    "name": "William DURAND",
                     "email": "william.durand1@gmail.com"
                 }
             ],
-            "description": "Geocoder GoogleMaps adapter",
+            "description": "Geocoder Nominatim adapter",
             "homepage": "http://geocoder-php.org/Geocoder/",
-            "time": "2018-03-03T14:37:50+00:00"
+            "time": "2018-02-15T12:58:08+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",

@@ -57,7 +57,7 @@ class Container extends Pimple
     {
         $this[Geocoder\Geocoder::class] = function () {
             $httpClient = new GuzzleClient();
-            $provider = new Geocoder\Provider\GoogleMaps\GoogleMaps($httpClient);
+            $provider = Geocoder\Provider\Nominatim\Nominatim::withOpenStreetMapServer($httpClient);
 
             return new Geocoder\StatefulGeocoder($provider);
         };
