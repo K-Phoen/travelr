@@ -1,34 +1,16 @@
 #!/usr/bin/env bash
 
-make deps
-make permissions
-
-echo -e '\e[32m→ Stashing modified/untracked files\e[0m'
-git stash -u
+set -e
 
 echo -e '\e[32m→ Building…\e[0m'
 make release
 
-echo -e '\e[32m→ Switching back to gh-pages\e[0m'
-git checkout gh-pages
+echo -e '\e[32m→ Saving the changes on the gh-pages branch…\e[0m'
+git branch -D gh-pages draft || true
+git checkout -b draft
+git add -f web/
+git commit -am "Published by `whoami`"
+git subtree split --prefix web -b gh-pages
 
-echo '.env' > .gitignore
-echo 'vendor' >> .gitignore
-echo 'node_modules' >> .gitignore
-echo 'web' >> .gitignore
-
-cp -R web/* .
-git add .
-git commit -m "Publish (`date`)"
-
-echo -e '\e[32m→ Pushing\e[0m'
-git push origin gh-pages -f
-
-git clean -fdx
-
-echo -e '\e[32m→ Switching back to master\e[0m'
-git checkout master
-
-git stash apply
-
-echo -e '\e[32m→ Cleaning temp directory\e[0m'
+echo -e '\e[32m→ Pushing…\e[0m'
+git push --force origin gh-pages:gh-pages
