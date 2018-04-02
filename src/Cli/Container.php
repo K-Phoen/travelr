@@ -25,6 +25,7 @@ class Container extends Pimple
     private function configure(): void
     {
         $this['views_dir'] = dirname(__DIR__, 2) . '/views/';
+        $this['dist_dir'] = dirname(__DIR__, 2) . '/dist/';
 
         $this->templating();
         $this->geocoder();
@@ -69,7 +70,6 @@ class Container extends Pimple
         $this['twig'] = new \Twig_Environment($loader, [
             'strict_variables' => true,
         ]);
-        $this['twig']->addGlobal('MAP_ACCESS_TOKEN', $_ENV['MAP_ACCESS_TOKEN']);
     }
 
     private function compilers(): void
@@ -91,6 +91,10 @@ class Container extends Pimple
     {
         $this[Command\ListDirectories::class] = function ($c) {
             return new Command\ListDirectories($c[Directories::class]);
+        };
+
+        $this[Command\CopyDist::class] = function ($c) {
+            return new Command\CopyDist($c['dist_dir']);
         };
 
         $this[Command\BuildAlbumsMapView::class] = function ($c) {

@@ -19,13 +19,13 @@ class ListDirectories
         $this->directoriesRepo = $directoriesRepo;
     }
 
-    public function run(OutputInterface $output): void
+    public function run(string $webRoot, OutputInterface $output): void
     {
         $table = new Table($output);
         $table->setHeaders(['Title', 'Directory', 'Cover', 'Latitude', 'Longitude']);
 
         /** @var Directory $dir */
-        foreach ($this->directoriesRepo->findAll() as $dir) {
+        foreach ($this->directoriesRepo->findAll($webRoot) as $dir) {
             $table->addRow([
                 $dir->config()->title(),
                 $dir->path(),

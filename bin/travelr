@@ -6,8 +6,5 @@ require __DIR__.'/../vendor/autoload.php';
 use Travelr\Cli\Application;
 use Travelr\Cli\Container;
 
-$dotenv = new Dotenv\Dotenv(__DIR__.'/../');
-$dotenv->load();
-
 $app = new Application(new Container());
 $app->run();

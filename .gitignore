@@ -1,4 +1,6 @@
 /vendor/
 /node_modules/
+/dist/
 /web/
 /.env
+/travelr.phar

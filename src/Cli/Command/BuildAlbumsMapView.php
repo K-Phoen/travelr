@@ -17,11 +17,11 @@ class BuildAlbumsMapView
         $this->albumsMapViewCompiler = $albumsMapViewCompiler;
     }
 
-    public function run(string $destinationFile, OutputInterface $output): void
+    public function run(string $webRoot, OutputInterface $output): void
     {
         $output->writeln('<info>Compiling albums map view...</info>');
 
-        $this->albumsMapViewCompiler->compile($destinationFile);
+        $this->albumsMapViewCompiler->compile($webRoot);
 
         $output->writeln('Done.');
     }

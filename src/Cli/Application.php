@@ -28,7 +28,9 @@ class Application extends Silly
     private function registerCommands(): void
     {
         $this
-            ->command('directories:list', [Command\ListDirectories::class, 'run'])
+            ->command('directories:list', function (string $webRoot, OutputInterface $output) {
+                $this->service(Command\ListDirectories::class)->run($webRoot, $output);
+            })
             ->descriptions('List available directories.');
 
         $this
@@ -48,6 +50,7 @@ class Application extends Silly
                 $this->service(Command\AlbumsToJson::class)->run($webRoot, $output);
                 $this->service(Command\BuildAlbumsMapView::class)->run($webRoot, $output);
                 $this->service(Command\BuildGalleries::class)->run($webRoot, $output);
+                $this->service(Command\CopyDist::class)->run($webRoot, $output);
             })
             ->descriptions('Builds the map and galleries.');
     }
