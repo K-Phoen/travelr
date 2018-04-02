@@ -24,6 +24,9 @@
         "intervention/image": "^2.4",
         "twig/twig": "^2.4",
         "vlucas/phpdotenv": "^2.4",
-        "symfony/filesystem": "^4.0"
+        "symfony/filesystem": "^4.0",
+        "geocoder-php/google-maps-provider": "^4.2",
+        "php-http/guzzle6-adapter": "^1.1",
+        "php-http/message": "^1.6"
     }
 }

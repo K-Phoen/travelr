@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Travelr\Cli;
 
+use Geocoder;
+use Http\Adapter\Guzzle6\Client as GuzzleClient;
 use Pimple\Container as Pimple;
 use Travelr\Repository\Albums;
 use Travelr\Config\Parser as ConfigParser;
@@ -24,11 +26,12 @@ class Container extends Pimple
     {
         $this->directories();
         $this->templating();
+        $this->geocoder();
         $this->compilers();
         $this->commands();
 
-        $this[ConfigParser::class] = function () {
-            return new ConfigParser();
+        $this[ConfigParser::class] = function ($c) {
+            return new ConfigParser($c[Geocoder\Geocoder::class]);
         };
 
         $this[Albums::class] = function ($c) {
@@ -53,6 +56,16 @@ class Container extends Pimple
         $this['data_dir'] = realpath(__DIR__.'/../../web/data/');
         $this['web_dir'] = realpath(__DIR__.'/../../web/');
         $this['views_dir'] = realpath(__DIR__.'/../../views/');
+    }
+
+    private function geocoder(): void
+    {
+        $this[Geocoder\Geocoder::class] = function () {
+            $httpClient = new GuzzleClient();
+            $provider = new Geocoder\Provider\GoogleMaps\GoogleMaps($httpClient);
+
+            return new Geocoder\StatefulGeocoder($provider);
+        };
     }
 
     private function templating(): void
