@@ -34,25 +34,14 @@ class Application extends Silly
             ->descriptions('List available directories.');
 
         $this
-            ->command('build:albums:json [webroot]', function (string $webRoot, OutputInterface $output) {
-                $this->service(Command\AlbumsToJson::class)->run($webRoot, $output);
-            });
-
-        $this
-            ->command('build:albums:map [webroot]', function (string $webRoot, OutputInterface $output) {
-                $this->service(Command\BuildAlbumsMapView::class)->run($webRoot, $output);
-            });
-
-        $this->command('build:albums:galleries', [Command\BuildGalleries::class, 'run']);
-
-        $this
             ->command('build [webroot]', function (string $webRoot, OutputInterface $output) {
                 $this->service(Command\AlbumsToJson::class)->run($webRoot, $output);
                 $this->service(Command\BuildAlbumsMapView::class)->run($webRoot, $output);
                 $this->service(Command\BuildGalleries::class)->run($webRoot, $output);
                 $this->service(Command\CopyDist::class)->run($webRoot, $output);
             })
-            ->descriptions('Builds the map and galleries.');
+            ->descriptions('Builds the map and galleries.')
+            ->defaults(['webroot' => '.']);
     }
 
     private function service(string $service)
