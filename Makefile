@@ -1,6 +1,9 @@
-.PHONY: build
+.PHONY: build tests
 
 deps: vendor/autoload.php npm
+
+tests:
+	./vendor/bin/phpunit
 
 # we only do `install`, as composer.json may change
 # without wanting to update dependencies.
