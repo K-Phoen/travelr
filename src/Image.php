@@ -12,12 +12,12 @@ final class Image
     /** @var string */
     private $thumbnailPath;
 
-    public static function fromPath(string $path, string $thumbnailPath = null): Image
+    public static function fromPath(string $path, string $thumbnailPath = null): self
     {
         return new static($path, $thumbnailPath ?? $path);
     }
 
-    public static function thumbFrom(Image $source, string $thumbPrefix): Image
+    public static function thumbFrom(self $source, string $thumbPrefix): self
     {
         return static::fromPath($source->path(), $source->directory().'/'.$thumbPrefix.$source->filename());
     }
@@ -28,7 +28,7 @@ final class Image
         $this->thumbnailPath = $thumbnailPath;
     }
 
-    public function relativeTo(string $directory): Image
+    public function relativeTo(string $directory): self
     {
         $directory = \realpath($directory);
 
