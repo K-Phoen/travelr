@@ -24,8 +24,8 @@ class Container extends Pimple
 
     private function configure(): void
     {
-        $this['views_dir'] = dirname(__DIR__, 2) . '/views/';
-        $this['dist_dir'] = dirname(__DIR__, 2) . '/dist/';
+        $this['views_dir'] = dirname(__DIR__, 2).'/views/';
+        $this['dist_dir'] = dirname(__DIR__, 2).'/dist/';
 
         $this->templating();
         $this->geocoder();

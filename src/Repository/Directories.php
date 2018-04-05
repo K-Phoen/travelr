@@ -11,6 +11,7 @@ use Travelr\Config\Parser;
 class Directories
 {
     private const CONFIG_FILENAME = 'config.yaml';
+
     private const ALLOWED_EXTENSIONS = ['jpg', 'jpeg', 'png'];
 
     /** @var Parser */
