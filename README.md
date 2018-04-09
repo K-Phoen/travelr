@@ -1,4 +1,4 @@
-# Travelr
+# Travelr ![PHP7 ready](https://img.shields.io/badge/PHP7-ready-green.svg) [![Build Status](https://travis-ci.org/K-Phoen/travelr.svg?branch=master)](https://travis-ci.org/K-Phoen/travelr) [![Coverage Status](https://coveralls.io/repos/github/K-Phoen/travelr/badge.svg?branch=master)](https://coveralls.io/github/K-Phoen/travelr?branch=master)
 
 Travelr is another static gallery generator.
 
