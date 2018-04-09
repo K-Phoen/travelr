@@ -14,7 +14,7 @@ final class Image
 
     public static function fromPath(string $path, string $thumbnailPath = null): self
     {
-        return new static($path, $thumbnailPath ?? $path);
+        return new static($path, $thumbnailPath ?: $path);
     }
 
     public static function thumbFrom(self $source, string $thumbPrefix): self
@@ -54,5 +54,10 @@ final class Image
     public function directory(): string
     {
         return pathinfo($this->path, PATHINFO_DIRNAME);
+    }
+
+    public function thumbDirectory(): string
+    {
+        return pathinfo($this->thumbnailPath, PATHINFO_DIRNAME);
     }
 }

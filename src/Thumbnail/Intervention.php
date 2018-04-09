@@ -16,9 +16,9 @@ class Intervention implements Thumbnailer
     /** @var Filesystem */
     private $fs;
 
-    public function __construct(Filesystem $fs = null)
+    public function __construct(ImageManager $manager = null, Filesystem $fs = null)
     {
-        $this->manager = new ImageManager(['driver' => 'gd']);
+        $this->manager = $manager ?: new ImageManager(['driver' => 'gd']);
         $this->fs = $fs ?: new Filesystem();
     }
 
@@ -30,7 +30,7 @@ class Intervention implements Thumbnailer
             return $thumb;
         }
 
-        $this->fs->mkdir($thumb->directory());
+        $this->fs->mkdir($thumb->thumbDirectory());
 
         $this->manager
             ->make($image->path())
