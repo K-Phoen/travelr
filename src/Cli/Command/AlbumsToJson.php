@@ -21,7 +21,7 @@ class AlbumsToJson
     {
         $output->writeln('<info>Compiling albums...</info>');
 
-        $this->albumsListCompiler->compile($webRoot);
+        $this->albumsListCompiler->compile(\realpath($webRoot));
 
         $output->writeln('Done.');
     }

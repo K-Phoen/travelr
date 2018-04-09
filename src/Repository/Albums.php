@@ -24,9 +24,9 @@ class Albums
     }
 
     /**
-     * @return \Generator|Album[]
+     * @return iterable|Album[]
      */
-    public function findAll(string $webRoot): \Generator
+    public function findAll(string $webRoot): iterable
     {
         foreach ($this->directoriesRepo->findAll($webRoot) as $directory) {
             yield $this->albumFromDirectory($directory);
