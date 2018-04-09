@@ -49,7 +49,7 @@ class AlbumsToJsonTest extends TestCase
             ->method('findAll')
             ->with('/webroot')
             ->willReturn([
-                $a = new Album('/webroot/data/album-name', 'Title', '', new Coordinates(42.2, 24.4), Image::fromPath('/webroot/data/album-name/cover.jpeg'), []),
+                new Album('/webroot/data/album-name', 'Title', '', new Coordinates(42.2, 24.4), Image::fromPath('/webroot/data/album-name/cover.jpeg'), []),
             ]);
 
         $this->fs->expects($this->once())
