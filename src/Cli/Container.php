@@ -65,11 +65,13 @@ class Container extends Pimple
 
     private function templating(): void
     {
-        $loader = new \Twig_Loader_Filesystem($this['views_dir']);
+        $this['twig'] = function () {
+            $loader = new \Twig_Loader_Filesystem($this['views_dir']);
 
-        $this['twig'] = new \Twig_Environment($loader, [
-            'strict_variables' => true,
-        ]);
+            new \Twig_Environment($loader, [
+                'strict_variables' => true,
+            ]);
+        };
     }
 
     private function compilers(): void
