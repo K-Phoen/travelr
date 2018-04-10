@@ -2,7 +2,6 @@
 
 namespace Tests\Travelr\Repository;
 
-use Geocoder\Geocoder;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 use PHPUnit\Framework\TestCase;
