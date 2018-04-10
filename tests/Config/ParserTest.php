@@ -12,6 +12,7 @@ use Geocoder\Query\GeocodeQuery;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 use PHPUnit\Framework\TestCase;
+use Travelr\Config\InvalidConfiguration;
 use Travelr\Config\Parser;
 use Travelr\DirectoryConfig;
 
@@ -43,6 +44,20 @@ description: blablabla
 cover: 0001.jpg
 
 location: Valencia, Spain
+',
+            'invalid_missing_cover.yaml' => '
+title: Barcelone – 2018
+description: blablabla
+
+latitude: 41.3947688
+longitude: 2.0787284
+',
+            'invalid_location.yaml' => '
+title: Barcelone – 2018
+description: blablabla
+cover: 0001.jpg
+
+latitude: 41.3947688
 ',
         ]);
 
@@ -88,5 +103,21 @@ location: Valencia, Spain
         $this->assertSame('0001.jpg', $config->cover());
         $this->assertSame(42.2, $config->coordinates()->latitude());
         $this->assertSame(24.4, $config->coordinates()->longitude());
+    }
+
+    public function testItThrowsAnErrorIfTheCoverIsNotSpecified(): void
+    {
+        $this->expectException(InvalidConfiguration::class);
+        $this->expectExceptionMessage('The child node "cover" at path "album" must be configured');
+
+        $this->parser->read($this->root->url().'/invalid_missing_cover.yaml');
+    }
+
+    public function testItThrowsAnErrorIfTheLocationIsNotSpecified(): void
+    {
+        $this->expectException(InvalidConfiguration::class);
+        $this->expectExceptionMessage('either specify the "location" option or the latitude/longitude ones');
+
+        $this->parser->read($this->root->url().'/invalid_location.yaml');
     }
 }
