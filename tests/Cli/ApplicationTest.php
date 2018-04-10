@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Travelr\Cli;
 
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Travelr\Cli\Application;
 use Travelr\Cli\Container;

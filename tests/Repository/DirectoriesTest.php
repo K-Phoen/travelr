@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Travelr\Repository;
 
 use org\bovigo\vfs\vfsStream;
@@ -75,12 +77,12 @@ class DirectoriesTest extends TestCase
         $directories = iterator_to_array($this->repo->findAll($this->root->url()));
 
         $this->assertCount(2, $directories);
-        $this->assertEquals([
+        $this->assertSame([
             $this->root->url().'/data/first_album/002.jpeg',
             $this->root->url().'/data/first_album/001.jpeg',
         ], iterator_to_array($directories[0]->images()));
 
-        $this->assertEquals([
+        $this->assertSame([
             $this->root->url().'/data/second_album/201805101439_001.jpg',
             $this->root->url().'/data/second_album/201805101439_002.PNG',
         ], iterator_to_array($directories[1]->images()));

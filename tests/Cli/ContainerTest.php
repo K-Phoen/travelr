@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Travelr\Cli;
 
 use PHPUnit\Framework\TestCase;

@@ -5,3 +5,4 @@
 /.env
 /travelr.phar
 /clover.xml
+/.php_cs.cache
