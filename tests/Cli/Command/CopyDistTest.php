@@ -38,6 +38,6 @@ class CopyDistTest extends TestCase
             ->method('mirror')
             ->with(self::DIST_DIR, __DIR__.'/dist');
 
-        $this->command->run(__DIR__, $this->output);
+        $this->command->run($this->output, __DIR__);
     }
 }

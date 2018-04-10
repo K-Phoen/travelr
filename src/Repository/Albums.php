@@ -6,6 +6,7 @@ namespace Travelr\Repository;
 
 use Travelr\Album;
 use Travelr\Directory;
+use Travelr\GlobalConfig;
 use Travelr\Image;
 use Travelr\Thumbnail\Thumbnailer;
 
@@ -26,9 +27,9 @@ class Albums
     /**
      * @return iterable|Album[]
      */
-    public function findAll(string $webRoot): iterable
+    public function findAll(string $webRoot, GlobalConfig $config): iterable
     {
-        foreach ($this->directoriesRepo->findAll($webRoot) as $directory) {
+        foreach ($this->directoriesRepo->findAll($webRoot, $config) as $directory) {
             yield $this->albumFromDirectory($directory);
         }
     }

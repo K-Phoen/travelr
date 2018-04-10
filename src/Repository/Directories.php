@@ -6,7 +6,8 @@ namespace Travelr\Repository;
 
 use Symfony\Component\Finder\Finder;
 use Travelr\Directory;
-use Travelr\Config\Parser;
+use Travelr\Config\DirectoryParser;
+use Travelr\GlobalConfig;
 
 class Directories
 {
@@ -14,10 +15,10 @@ class Directories
 
     private const ALLOWED_EXTENSIONS = ['jpg', 'jpeg', 'png'];
 
-    /** @var Parser */
+    /** @var DirectoryParser */
     private $configParser;
 
-    public function __construct(Parser $configParser)
+    public function __construct(DirectoryParser $configParser)
     {
         $this->configParser = $configParser;
     }
@@ -25,7 +26,7 @@ class Directories
     /**
      * @return \Generator|Directory[]
      */
-    public function findAll(string $webRoot): \Generator
+    public function findAll(string $webRoot, GlobalConfig $config): \Generator
     {
         $finder = new Finder();
         $finder
@@ -41,12 +42,12 @@ class Directories
             yield new Directory(
                 \dirname($configFile->getPathname()),
                 $directoryConfig,
-                $this->imagesPaths($configFile->getPath())
+                $this->imagesPaths($configFile->getPath(), $config)
             );
         }
     }
 
-    private function imagesPaths(string $directory): iterable
+    private function imagesPaths(string $directory, GlobalConfig $config): iterable
     {
         $finder = new Finder();
         $finder
@@ -58,6 +59,12 @@ class Directories
             })
             ->depth(0)
             ->in($directory);
+
+        if ($config->sortImagesBy() === GlobalConfig::SORT_BY_NAME) {
+            $finder->sortByName();
+        } else if ($config->sortImagesBy() === GlobalConfig::SORT_BY_MODIFICATION_DATE) {
+            $finder->sortByModifiedTime();
+        }
 
         foreach ($finder as $file) {
             yield $file->getPathname();

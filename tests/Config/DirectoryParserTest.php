@@ -13,10 +13,10 @@ use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 use PHPUnit\Framework\TestCase;
 use Travelr\Config\InvalidConfiguration;
-use Travelr\Config\Parser;
+use Travelr\Config\DirectoryParser;
 use Travelr\DirectoryConfig;
 
-class ParserTest extends TestCase
+class DirectoryParserTest extends TestCase
 {
     /** @var Geocoder */
     private $geocoder;
@@ -24,7 +24,7 @@ class ParserTest extends TestCase
     /** @var vfsStreamDirectory */
     private $root;
 
-    /** @var Parser */
+    /** @var DirectoryParser */
     private $parser;
 
     public function setUp(): void
@@ -63,7 +63,7 @@ latitude: 41.3947688
 
         $this->geocoder = $this->createMock(Geocoder::class);
 
-        $this->parser = new Parser($this->geocoder);
+        $this->parser = new DirectoryParser($this->geocoder);
     }
 
     public function testItReadsAFullConfigFile(): void

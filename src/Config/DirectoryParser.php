@@ -12,7 +12,7 @@ use Symfony\Component\Yaml\Yaml;
 use Travelr\Coordinates;
 use Travelr\DirectoryConfig;
 
-class Parser
+class DirectoryParser
 {
     /** @var Geocoder */
     private $geocoder;

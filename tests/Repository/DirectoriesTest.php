@@ -7,9 +7,10 @@ namespace Tests\Travelr\Repository;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 use PHPUnit\Framework\TestCase;
-use Travelr\Config\Parser;
+use Travelr\Config\DirectoryParser;
 use Travelr\Coordinates;
 use Travelr\DirectoryConfig;
+use Travelr\GlobalConfig;
 use Travelr\Repository\Directories;
 
 class DirectoriesTest extends TestCase
@@ -17,7 +18,7 @@ class DirectoriesTest extends TestCase
     /** @var vfsStreamDirectory */
     private $root;
 
-    /** @var Parser */
+    /** @var DirectoryParser */
     private $configParser;
 
     /** @var Directories */
@@ -42,13 +43,14 @@ class DirectoriesTest extends TestCase
             ],
         ]);
 
-        $this->configParser = $this->createMock(Parser::class);
+        $this->configParser = $this->createMock(DirectoryParser::class);
 
         $this->repo = new Directories($this->configParser);
     }
 
     public function testItIgnoresDirectoriesWithNoConfigFile(): void
     {
+        $globalConfig = GlobalConfig::default();
         $dummyDirectoryConfig = new DirectoryConfig('title', 'description', new Coordinates(0, 0), 'cover.jpg');
 
         $this->configParser
@@ -56,7 +58,7 @@ class DirectoriesTest extends TestCase
             ->method('read')
             ->willReturn($dummyDirectoryConfig);
 
-        $directories = iterator_to_array($this->repo->findAll($this->root->url()));
+        $directories = iterator_to_array($this->repo->findAll($this->root->url(), $globalConfig));
 
         $this->assertCount(2, $directories);
         $this->assertSame($this->root->url().'/data/first_album', $directories[0]->path());
@@ -67,6 +69,7 @@ class DirectoriesTest extends TestCase
 
     public function testItReturnsTheRightImages(): void
     {
+        $globalConfig = GlobalConfig::default();
         $dummyDirectoryConfig = new DirectoryConfig('title', 'description', new Coordinates(0, 0), 'cover.jpg');
 
         $this->configParser
@@ -74,12 +77,12 @@ class DirectoriesTest extends TestCase
             ->method('read')
             ->willReturn($dummyDirectoryConfig);
 
-        $directories = iterator_to_array($this->repo->findAll($this->root->url()));
+        $directories = iterator_to_array($this->repo->findAll($this->root->url(), $globalConfig));
 
         $this->assertCount(2, $directories);
         $this->assertSame([
-            $this->root->url().'/data/first_album/002.jpeg',
             $this->root->url().'/data/first_album/001.jpeg',
+            $this->root->url().'/data/first_album/002.jpeg',
         ], iterator_to_array($directories[0]->images()));
 
         $this->assertSame([

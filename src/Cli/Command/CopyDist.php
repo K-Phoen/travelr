@@ -21,7 +21,7 @@ class CopyDist
         $this->fs = $fs ?: new Filesystem();
     }
 
-    public function run(string $webRoot, OutputInterface $output): void
+    public function run(OutputInterface $output, string $webRoot): void
     {
         $output->writeln('<info>Copying compiled CSS and JS assets...</info>');
 

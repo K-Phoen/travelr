@@ -17,7 +17,7 @@ class BuildAlbumsMapView
         $this->albumsMapViewCompiler = $albumsMapViewCompiler;
     }
 
-    public function run(string $webRoot, OutputInterface $output): void
+    public function run(OutputInterface $output, string $webRoot): void
     {
         $output->writeln('<info>Compiling albums map view...</info>');
 

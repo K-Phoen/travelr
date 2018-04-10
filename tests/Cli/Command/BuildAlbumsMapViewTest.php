@@ -37,6 +37,6 @@ class BuildAlbumsMapViewTest extends TestCase
             ->method('compile')
             ->with(__DIR__);
 
-        $this->command->run(__DIR__, $this->output);
+        $this->command->run($this->output, __DIR__);
     }
 }

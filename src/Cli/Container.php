@@ -8,7 +8,8 @@ use Geocoder;
 use Http\Adapter\Guzzle6\Client as GuzzleClient;
 use Pimple\Container as Pimple;
 use Travelr\Repository\Albums;
-use Travelr\Config\Parser as ConfigParser;
+use Travelr\Config\DirectoryParser as DirectoryConfigParser;
+use Travelr\Config\GlobalParser as GlobalConfigParser;
 use Travelr\Repository\Directories;
 use Travelr\Thumbnail;
 use Travelr\Compiler;
@@ -32,8 +33,12 @@ class Container extends Pimple
         $this->compilers();
         $this->commands();
 
-        $this[ConfigParser::class] = function ($c) {
-            return new ConfigParser($c[Geocoder\Geocoder::class]);
+        $this[DirectoryConfigParser::class] = function ($c) {
+            return new DirectoryConfigParser($c[Geocoder\Geocoder::class]);
+        };
+
+        $this[GlobalConfigParser::class] = function () {
+            return new GlobalConfigParser();
         };
 
         $this[Albums::class] = function ($c) {
@@ -41,7 +46,7 @@ class Container extends Pimple
         };
 
         $this[Directories::class] = function ($c) {
-            return new Directories($c[ConfigParser::class]);
+            return new Directories($c[DirectoryConfigParser::class]);
         };
 
         $this[Thumbnail\KeepOriginal::class] = function () {
@@ -104,11 +109,11 @@ class Container extends Pimple
         };
 
         $this[Command\AlbumsToJson::class] = function ($c) {
-            return new Command\AlbumsToJson($c[Compiler\AlbumsToJson::class]);
+            return new Command\AlbumsToJson($c[Compiler\AlbumsToJson::class], $c[GlobalConfigParser::class]);
         };
 
         $this[Command\BuildGalleries::class] = function ($c) {
-            return new Command\BuildGalleries($c[Albums::class], $c[Compiler\GalleryView::class]);
+            return new Command\BuildGalleries($c[Albums::class], $c[Compiler\GalleryView::class], $c[GlobalConfigParser::class]);
         };
     }
 }

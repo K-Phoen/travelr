@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Travelr\Compiler;
 
 use Symfony\Component\Filesystem\Filesystem;
+use Travelr\GlobalConfig;
 use Travelr\Repository\Albums;
 
 class AlbumsToJson
@@ -21,11 +22,11 @@ class AlbumsToJson
         $this->fs = $fs ?: new Filesystem();
     }
 
-    public function compile(string $webRoot): void
+    public function compile(string $webRoot, GlobalConfig $config): void
     {
         $albumsData = [];
 
-        foreach ($this->albumsRepo->findAll($webRoot) as $album) {
+        foreach ($this->albumsRepo->findAll($webRoot, $config) as $album) {
             $albumsData[] = [
                 'slug' => $album->slug(),
                 'title' => $album->title(),

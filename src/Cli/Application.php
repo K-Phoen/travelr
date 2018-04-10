@@ -28,17 +28,17 @@ class Application extends Silly
     private function registerCommands(): void
     {
         $this
-            ->command('directories:list', function (string $webRoot, OutputInterface $output): void {
-                $this->service(Command\ListDirectories::class)->run($webRoot, $output);
+            ->command('directories:list', function (string $webRoot, OutputInterface $output, string $config = null): void {
+                $this->service(Command\ListDirectories::class)->run($output, $webRoot, $config);
             })
             ->descriptions('List available directories.');
 
         $this
-            ->command('build [webroot]', function (string $webRoot, OutputInterface $output): void {
-                $this->service(Command\AlbumsToJson::class)->run($webRoot, $output);
-                $this->service(Command\BuildAlbumsMapView::class)->run($webRoot, $output);
-                $this->service(Command\BuildGalleries::class)->run($webRoot, $output);
-                $this->service(Command\CopyDist::class)->run($webRoot, $output);
+            ->command('build [--config=] [webroot]', function (string $webRoot, OutputInterface $output, string $config = null): void {
+                $this->service(Command\AlbumsToJson::class)->run($output, $webRoot, $config);
+                $this->service(Command\BuildAlbumsMapView::class)->run($output, $webRoot);
+                $this->service(Command\BuildGalleries::class)->run($output, $webRoot, $config);
+                $this->service(Command\CopyDist::class)->run($output, $webRoot);
             })
             ->descriptions('Builds the map and galleries.')
             ->defaults(['webroot' => '.']);

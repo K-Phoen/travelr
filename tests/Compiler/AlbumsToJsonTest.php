@@ -9,6 +9,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Travelr\Album;
 use Travelr\Compiler\AlbumsToJson;
 use Travelr\Coordinates;
+use Travelr\GlobalConfig;
 use Travelr\Image;
 use Travelr\Repository\Albums;
 
@@ -33,23 +34,27 @@ class AlbumsToJsonTest extends TestCase
 
     public function testItGeneratesAJsonFileEvenIfThereAreNoAlbums(): void
     {
+        $config = GlobalConfig::default();
+
         $this->albumsRepo
             ->method('findAll')
-            ->with('/webroot')
+            ->with('/webroot', $config)
             ->willReturn([]);
 
         $this->fs->expects($this->once())
             ->method('dumpFile')
             ->with('/webroot/albums.json', '[]');
 
-        $this->compiler->compile('/webroot');
+        $this->compiler->compile('/webroot', $config);
     }
 
     public function testItCorrectlyDumpsAlbums(): void
     {
+        $config = GlobalConfig::default();
+
         $this->albumsRepo
             ->method('findAll')
-            ->with('/webroot')
+            ->with('/webroot', $config)
             ->willReturn([
                 new Album('/webroot/data/album-name', 'Title', '', new Coordinates(42.2, 24.4), Image::fromPath('/webroot/data/album-name/cover.jpeg'), []),
             ]);
@@ -67,6 +72,6 @@ class AlbumsToJsonTest extends TestCase
                 ],
             ], JSON_PRETTY_PRINT));
 
-        $this->compiler->compile('/webroot');
+        $this->compiler->compile('/webroot', $config);
     }
 }
