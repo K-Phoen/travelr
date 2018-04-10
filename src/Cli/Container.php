@@ -68,7 +68,7 @@ class Container extends Pimple
         $this['twig'] = function () {
             $loader = new \Twig_Loader_Filesystem($this['views_dir']);
 
-            new \Twig_Environment($loader, [
+            return new \Twig_Environment($loader, [
                 'strict_variables' => true,
             ]);
         };
