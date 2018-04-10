@@ -14,12 +14,12 @@ class KeepOriginalTest extends TestCase
     /** @var Intervention */
     private $thumbnailer;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->thumbnailer = new KeepOriginal();
     }
 
-    public function testItReturnsTheImageUntouched()
+    public function testItReturnsTheImageUntouched(): void
     {
         $image = Image::fromPath('/dir/img.png');
 

@@ -17,7 +17,7 @@ class ApplicationTest extends TestCase
     /** @var Container */
     private $application;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->container = new Container();
 

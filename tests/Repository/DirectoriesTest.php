@@ -23,7 +23,7 @@ class DirectoriesTest extends TestCase
     /** @var Directories */
     private $repo;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->root = vfsStream::setup('root_dir', null, [
             'data' => [

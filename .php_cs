@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__.'/src')
+    ->in(__DIR__.'/tests')
 ;
 
 return PhpCsFixer\Config::create()
@@ -13,6 +14,8 @@ return PhpCsFixer\Config::create()
         '@Symfony:risky' => true,
         '@PHP70Migration' => true,
         '@PHP70Migration:risky' => true,
+        '@PHP71Migration' => true,
+        '@PHP71Migration:risky' => true,
         'phpdoc_add_missing_param_annotation' => true,
         'phpdoc_annotation_without_dot' => false,
         'php_unit_strict' => true,

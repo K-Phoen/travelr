@@ -21,7 +21,7 @@ class InterventionTest extends TestCase
     /** @var Intervention */
     private $thumbnailer;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->manager = $this->createMock(ImageManager::class);
         $this->fs = $this->createMock(Filesystem::class);
@@ -29,7 +29,7 @@ class InterventionTest extends TestCase
         $this->thumbnailer = new Intervention($this->manager, $this->fs);
     }
 
-    public function testItDoesNothingIfTheThumbnailAlreadyExists()
+    public function testItDoesNothingIfTheThumbnailAlreadyExists(): void
     {
         $image = Image::fromPath('/dir/img.png');
 
@@ -47,7 +47,7 @@ class InterventionTest extends TestCase
         $this->assertSame('/dir/img.png', $thumb->path());
     }
 
-    public function testItCreateItIfTheThumbnailDoesNotExist()
+    public function testItCreateItIfTheThumbnailDoesNotExist(): void
     {
         $image = Image::fromPath('/dir/img.png');
 

@@ -28,13 +28,13 @@ class Application extends Silly
     private function registerCommands(): void
     {
         $this
-            ->command('directories:list', function (string $webRoot, OutputInterface $output) {
+            ->command('directories:list', function (string $webRoot, OutputInterface $output): void {
                 $this->service(Command\ListDirectories::class)->run($webRoot, $output);
             })
             ->descriptions('List available directories.');
 
         $this
-            ->command('build [webroot]', function (string $webRoot, OutputInterface $output) {
+            ->command('build [webroot]', function (string $webRoot, OutputInterface $output): void {
                 $this->service(Command\AlbumsToJson::class)->run($webRoot, $output);
                 $this->service(Command\BuildAlbumsMapView::class)->run($webRoot, $output);
                 $this->service(Command\BuildGalleries::class)->run($webRoot, $output);
