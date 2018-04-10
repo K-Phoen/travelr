@@ -32,13 +32,14 @@ class Directories
             ->files()
             ->name(self::CONFIG_FILENAME)
             ->depth(1)
+            ->sortByName()
             ->in($webRoot.'/data');
 
         foreach ($finder as $configFile) {
-            $directoryConfig = $this->configParser->read($configFile->getRealPath());
+            $directoryConfig = $this->configParser->read($configFile->getPathname());
 
             yield new Directory(
-                \dirname($configFile->getRealPath()),
+                \dirname($configFile->getPathname()),
                 $directoryConfig,
                 $this->imagesPaths($configFile->getPath())
             );
@@ -59,7 +60,7 @@ class Directories
             ->in($directory);
 
         foreach ($finder as $file) {
-            yield $file->getRealPath();
+            yield $file->getPathname();
         }
     }
 }
