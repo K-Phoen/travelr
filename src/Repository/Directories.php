@@ -24,9 +24,9 @@ class Directories
     }
 
     /**
-     * @return \Generator|Directory[]
+     * @return iterable|Directory[]
      */
-    public function findAll(string $webRoot, GlobalConfig $config): \Generator
+    public function findAll(string $webRoot, GlobalConfig $config): iterable
     {
         $finder = new Finder();
         $finder
