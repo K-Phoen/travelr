@@ -7,6 +7,7 @@ namespace Travelr;
 final class GlobalConfig
 {
     public const SORT_BY_NAME = 'name';
+
     public const SORT_BY_MODIFICATION_DATE = 'modification_date';
 
     /** @var string */

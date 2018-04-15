@@ -4,17 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Travelr\Config;
 
-use Geocoder\Geocoder;
-use Geocoder\Model\Address;
-use Geocoder\Model\AddressCollection;
-use Geocoder\Model\Coordinates;
-use Geocoder\Query\GeocodeQuery;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 use PHPUnit\Framework\TestCase;
 use Travelr\Config\GlobalParser;
 use Travelr\Config\InvalidConfiguration;
-use Travelr\DirectoryConfig;
 use Travelr\GlobalConfig;
 
 class GlobalParserTest extends TestCase

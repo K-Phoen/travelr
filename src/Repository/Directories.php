@@ -62,7 +62,7 @@ class Directories
 
         if ($config->sortImagesBy() === GlobalConfig::SORT_BY_NAME) {
             $finder->sortByName();
-        } else if ($config->sortImagesBy() === GlobalConfig::SORT_BY_MODIFICATION_DATE) {
+        } elseif ($config->sortImagesBy() === GlobalConfig::SORT_BY_MODIFICATION_DATE) {
             $finder->sortByModifiedTime();
         }
 
