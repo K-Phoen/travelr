@@ -90,4 +90,36 @@ class DirectoriesTest extends TestCase
             $this->root->url().'/data/second_album/201805101439_002.PNG',
         ], iterator_to_array($directories[1]->images()));
     }
+
+    public function testTheResultsCanBeOrderedByName(): void
+    {
+        $globalConfig = new GlobalConfig(GlobalConfig::SORT_BY_NAME);
+        $dummyDirectoryConfig = new DirectoryConfig('title', 'description', new Coordinates(0, 0), 'cover.jpg');
+
+        $this->configParser->method('read')->willReturn($dummyDirectoryConfig);
+
+        $directories = iterator_to_array($this->repo->findAll($this->root->url(), $globalConfig));
+
+        $this->assertSame([
+            $this->root->url().'/data/second_album/201805101439_001.jpg',
+            $this->root->url().'/data/second_album/201805101439_002.PNG',
+        ], iterator_to_array($directories[1]->images()));
+    }
+
+    public function testTheResultsCanBeOrderedByDate(): void
+    {
+        touch($this->root->url().'/data/second_album/201805101439_002.PNG', strtotime('yesterday'));
+
+        $globalConfig = new GlobalConfig(GlobalConfig::SORT_BY_MODIFICATION_DATE);
+        $dummyDirectoryConfig = new DirectoryConfig('title', 'description', new Coordinates(0, 0), 'cover.jpg');
+
+        $this->configParser->method('read')->willReturn($dummyDirectoryConfig);
+
+        $directories = iterator_to_array($this->repo->findAll($this->root->url(), $globalConfig));
+
+        $this->assertSame([
+            $this->root->url().'/data/second_album/201805101439_002.PNG',
+            $this->root->url().'/data/second_album/201805101439_001.jpg',
+        ], iterator_to_array($directories[1]->images()));
+    }
 }
