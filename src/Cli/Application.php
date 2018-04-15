@@ -28,8 +28,8 @@ class Application extends Silly
     private function registerCommands(): void
     {
         $this
-            ->command('directories:list', function (string $webRoot, OutputInterface $output, string $config = null): void {
-                $this->service(Command\ListDirectories::class)->run($output, $webRoot, $config);
+            ->command('directories:list [webroot]', function (string $webRoot, OutputInterface $output): void {
+                $this->service(Command\ListDirectories::class)->run($output, $webRoot);
             })
             ->descriptions('List available directories.');
 

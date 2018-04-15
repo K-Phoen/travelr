@@ -7,6 +7,7 @@ namespace Travelr\Cli\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Output\OutputInterface;
 use Travelr\Directory;
+use Travelr\GlobalConfig;
 use Travelr\Repository\Directories;
 
 class ListDirectories
@@ -19,13 +20,15 @@ class ListDirectories
         $this->directoriesRepo = $directoriesRepo;
     }
 
-    public function run(string $webRoot, OutputInterface $output): void
+    public function run(OutputInterface $output, string $webRoot): void
     {
+        $config = GlobalConfig::default();
+
         $table = new Table($output);
         $table->setHeaders(['Title', 'Directory', 'Cover', 'Latitude', 'Longitude']);
 
         /** @var Directory $dir */
-        foreach ($this->directoriesRepo->findAll($webRoot) as $dir) {
+        foreach ($this->directoriesRepo->findAll($webRoot, $config) as $dir) {
             $table->addRow([
                 $dir->config()->title(),
                 $dir->path(),
