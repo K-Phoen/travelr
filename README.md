@@ -7,6 +7,14 @@ directories and use the photos in them to create a map of your travels.
 
 [See the demo](http://blog.kevingomez.fr/travelr/)
 
+## Features
+
+* Generation of a static map of your travels
+* Generation of static galleries, one for each of your travels
+* Configuration through simple YAML files
+* Automatic generation of thumbnails
+* Can be deployed on [GitHub's gh-pages](https://pages.github.com/)
+
 ## Authors
 
 * **Kévin Gomez** - *Initial work*
