@@ -24,6 +24,10 @@ class GlobalParser
             throw InvalidConfiguration::inFile($path, $e->getMessage(), $e);
         }
 
-        return new GlobalConfig($config['sort_images_by']);
+        return new GlobalConfig(
+            $config['sort_images_by'],
+            $config['map_provider'],
+            $config['map_api_key']
+        );
     }
 }

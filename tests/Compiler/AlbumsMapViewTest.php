@@ -7,6 +7,7 @@ namespace Tests\Travelr\Compiler;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
 use Travelr\Compiler\AlbumsMapView;
+use Travelr\GlobalConfig;
 
 class AlbumsMapViewTest extends TestCase
 {
@@ -29,15 +30,20 @@ class AlbumsMapViewTest extends TestCase
 
     public function testItRendersTheView(): void
     {
+        $config = GlobalConfig::default();
+
         $this->twig->expects($this->once())
             ->method('render')
-            ->with('index.html.twig')
+            ->with('index.html.twig', [
+                'map_tile_layer_url' => $config->mapTileLayerUrl(),
+                'map_api_key' => $config->mapApiKey(),
+            ])
             ->willReturn('content');
 
         $this->fs->expects($this->once())
             ->method('dumpFile')
             ->with('/webroot/index.html', 'content');
 
-        $this->compiler->compile('/webroot');
+        $this->compiler->compile('/webroot', $config);
     }
 }

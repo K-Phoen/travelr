@@ -105,7 +105,7 @@ class Container extends Pimple
         };
 
         $this[Command\BuildAlbumsMapView::class] = function ($c) {
-            return new Command\BuildAlbumsMapView($c[Compiler\AlbumsMapView::class]);
+            return new Command\BuildAlbumsMapView($c[Compiler\AlbumsMapView::class], $c[GlobalConfigParser::class]);
         };
 
         $this[Command\AlbumsToJson::class] = function ($c) {

@@ -40,7 +40,7 @@ class Application extends Silly
                 }
 
                 $this->service(Command\AlbumsToJson::class)->run($output, $webRoot, $config);
-                $this->service(Command\BuildAlbumsMapView::class)->run($output, $webRoot);
+                $this->service(Command\BuildAlbumsMapView::class)->run($output, $webRoot, $config);
                 $this->service(Command\BuildGalleries::class)->run($output, $webRoot, $config);
                 $this->service(Command\CopyDist::class)->run($output, $webRoot);
             })

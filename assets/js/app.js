@@ -6,9 +6,10 @@ const xhr = require('xhr');
 
 const map = L.map('map');
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+L.tileLayer(MAP_TILE_LAYER_URL, {
     maxZoom: 18,
     id: 'mapbox.streets',
+    accessToken: MAP_API_KEY
 }).addTo(map);
 
 map.zoomControl.setPosition('bottomright');

@@ -24,6 +24,8 @@ class GlobalParserTest extends TestCase
         $this->root = vfsStream::setup('root_dir', null, [
             'full_config_file.yaml' => '
 sort_images_by: name
+map_provider: mapbox
+map_api_key: some-api-key
 ',
             'invalid_unknown_option.yaml' => '
 unknown_option: foo

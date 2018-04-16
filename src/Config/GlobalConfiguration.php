@@ -23,6 +23,17 @@ class GlobalConfiguration implements ConfigurationInterface
                     ->cannotBeEmpty()
                     ->defaultValue(GlobalConfig::SORT_BY_NAME)
                 ->end()
+                ->enumNode('map_provider')
+                    ->values([GlobalConfig::MAP_OPENSTREETMAP, GlobalConfig::MAP_MAPBOX])
+                    ->isRequired()
+                    ->cannotBeEmpty()
+                    ->defaultValue(GlobalConfig::MAP_OPENSTREETMAP)
+                ->end()
+                ->scalarNode('map_api_key')
+                    ->isRequired()
+                    ->cannotBeEmpty()
+                    ->defaultValue('')
+                ->end()
             ->end()
         ;
 
