@@ -3,7 +3,7 @@
 /dist/
 /web/
 /.env
-/travelr.phar
+/*.phar
 /clover.xml
 /.php_cs.cache
 /travelr.yaml

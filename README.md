@@ -19,10 +19,15 @@ directories and use the photos in them to create a map of your travels.
 
 To generate your website, there are a few steps to follow:
 
-1. Download Travelr
+1. [Download Travelr](#downloading-travelr)
 2. [Configure your albums](#configuring-the-albums)
 3. [Generate the website](#generating-the-website)
 4. [Deploy!](#deploying)
+
+### Downloading Travelr
+
+The easiest way to use the PHAR archive. Download the latest archive in the [releases page](https://github.com/K-Phoen/travelr/releases/)
+and you will be good to go. 
 
 ### Configuring the albums
 
