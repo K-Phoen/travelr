@@ -37,6 +37,7 @@ class AlbumsMapViewTest extends TestCase
             ->with('index.html.twig', [
                 'map_tile_layer_url' => $config->mapTileLayerUrl(),
                 'map_api_key' => $config->mapApiKey(),
+                'title' => $config->title(),
             ])
             ->willReturn('content');
 

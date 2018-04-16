@@ -6,6 +6,7 @@ namespace Travelr\Compiler;
 
 use Symfony\Component\Filesystem\Filesystem;
 use Travelr\Album;
+use Travelr\GlobalConfig;
 
 class GalleryView
 {
@@ -21,9 +22,10 @@ class GalleryView
         $this->fs = $fs ?: new Filesystem();
     }
 
-    public function compile(Album $album): void
+    public function compile(Album $album, GlobalConfig $config): void
     {
         $html = $this->twig->render('album.html.twig', [
+            'title' => $config->title(),
             'album' => $album,
         ]);
 

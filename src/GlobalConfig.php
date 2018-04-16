@@ -15,6 +15,9 @@ final class GlobalConfig
     public const MAP_MAPBOX = 'mapbox';
 
     /** @var string */
+    private $title;
+
+    /** @var string */
     private $sortImagesBy;
 
     /** @var string */
@@ -25,10 +28,10 @@ final class GlobalConfig
 
     public static function default(): self
     {
-        return new static(self::SORT_BY_NAME, self::MAP_OPENSTREETMAP, '');
+        return new static('Travelr', self::SORT_BY_NAME, self::MAP_OPENSTREETMAP, '');
     }
 
-    public function __construct(string $sortImagesBy, string $mapProvider, string $mapApiKey)
+    public function __construct(string $title, string $sortImagesBy, string $mapProvider, string $mapApiKey)
     {
         if (!\in_array($sortImagesBy, [self::SORT_BY_MODIFICATION_DATE, self::SORT_BY_NAME], true)) {
             throw new \DomainException('Invalid sort option');
@@ -42,9 +45,15 @@ final class GlobalConfig
             throw new \DomainException('The chosen map provider requires an API key');
         }
 
+        $this->title = $title;
         $this->sortImagesBy = $sortImagesBy;
         $this->mapProvider = $mapProvider;
         $this->mapApiKey = $mapApiKey;
+    }
+
+    public function title(): string
+    {
+        return $this->title;
     }
 
     public function sortImagesBy(): string

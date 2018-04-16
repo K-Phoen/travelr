@@ -93,7 +93,7 @@ class DirectoriesTest extends TestCase
 
     public function testTheResultsCanBeOrderedByName(): void
     {
-        $globalConfig = new GlobalConfig(GlobalConfig::SORT_BY_NAME, GlobalConfig::MAP_OPENSTREETMAP, '');
+        $globalConfig = new GlobalConfig('Travelr', GlobalConfig::SORT_BY_NAME, GlobalConfig::MAP_OPENSTREETMAP, '');
         $dummyDirectoryConfig = new DirectoryConfig('title', 'description', new Coordinates(0, 0), 'cover.jpg');
 
         $this->configParser->method('read')->willReturn($dummyDirectoryConfig);
@@ -110,7 +110,7 @@ class DirectoriesTest extends TestCase
     {
         touch($this->root->url().'/data/second_album/201805101439_002.PNG', strtotime('yesterday'));
 
-        $globalConfig = new GlobalConfig(GlobalConfig::SORT_BY_MODIFICATION_DATE, GlobalConfig::MAP_OPENSTREETMAP, '');
+        $globalConfig = new GlobalConfig('Travelr', GlobalConfig::SORT_BY_MODIFICATION_DATE, GlobalConfig::MAP_OPENSTREETMAP, '');
         $dummyDirectoryConfig = new DirectoryConfig('title', 'description', new Coordinates(0, 0), 'cover.jpg');
 
         $this->configParser->method('read')->willReturn($dummyDirectoryConfig);

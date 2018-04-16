@@ -16,7 +16,7 @@ class GlobalConfigTest extends TestCase
     {
         $this->expectException(\DomainException::class);
 
-        new GlobalConfig($sort, $mapProvider, $mapApiKey);
+        new GlobalConfig('Travelr', $sort, $mapProvider, $mapApiKey);
     }
 
     public function invalidValuesProvider()

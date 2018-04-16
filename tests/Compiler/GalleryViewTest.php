@@ -9,6 +9,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Travelr\Album;
 use Travelr\Compiler\GalleryView;
 use Travelr\Coordinates;
+use Travelr\GlobalConfig;
 use Travelr\Image;
 
 class GalleryViewTest extends TestCase
@@ -32,6 +33,7 @@ class GalleryViewTest extends TestCase
 
     public function testItRendersTheView(): void
     {
+        $config = GlobalConfig::default();
         $album = new Album('/album/path', 'Title', '', new Coordinates(0, 0), Image::fromPath('/img/path'), []);
 
         $this->twig->expects($this->once())
@@ -43,6 +45,6 @@ class GalleryViewTest extends TestCase
             ->method('dumpFile')
             ->with('/album/path/index.html', 'content');
 
-        $this->compiler->compile($album);
+        $this->compiler->compile($album, $config);
     }
 }

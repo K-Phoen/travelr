@@ -25,6 +25,7 @@ class GlobalParser
         }
 
         return new GlobalConfig(
+            $config['title'],
             $config['sort_images_by'],
             $config['map_provider'],
             $config['map_api_key']

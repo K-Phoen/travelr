@@ -24,6 +24,7 @@ class AlbumsMapView
     public function compile(string $webRoot, GlobalConfig $config): void
     {
         $html = $this->twig->render('index.html.twig', [
+            'title' => $config->title(),
             'map_tile_layer_url' => $config->mapTileLayerUrl(),
             'map_api_key' => $config->mapApiKey(),
         ]);

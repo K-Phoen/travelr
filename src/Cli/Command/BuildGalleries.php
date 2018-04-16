@@ -37,7 +37,7 @@ class BuildGalleries
 
         /** @var Album $album */
         foreach ($this->albumsRepo->findAll($webRoot, $config) as $album) {
-            $this->galleryViewCompiler->compile($album);
+            $this->galleryViewCompiler->compile($album, $config);
         }
 
         $output->writeln('Done.');

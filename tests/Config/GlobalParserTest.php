@@ -26,6 +26,7 @@ class GlobalParserTest extends TestCase
 sort_images_by: name
 map_provider: mapbox
 map_api_key: some-api-key
+title: Some title
 ',
             'invalid_unknown_option.yaml' => '
 unknown_option: foo
