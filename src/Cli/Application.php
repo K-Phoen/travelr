@@ -34,7 +34,8 @@ class Application extends Silly
             ->command('directories:list [webroot]', function (string $webRoot, OutputInterface $output): void {
                 $this->service(Command\ListDirectories::class)->run($output, $webRoot);
             })
-            ->descriptions('List available directories.');
+            ->descriptions('List available directories.')
+            ->defaults(['webroot' => '.']);
 
         $this
             ->command('config:dump-reference [type]', function (string $type, OutputInterface $output): void {
