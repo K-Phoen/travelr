@@ -5,7 +5,8 @@ Encore
     .setOutputPath('dist/')
 
     // the public path used by the web server to access the previous directory
-    .setPublicPath('dist')
+    .setPublicPath('./')
+    .setManifestKeyPrefix('dist/')
 
     // will create public/build/app.js and public/build/app.css
     .addEntry('app', './assets/js/app.js')
