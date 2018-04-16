@@ -7,10 +7,6 @@ directories and use the photos in them to create a map of your travels.
 
 [See the demo](http://blog.kevingomez.fr/travelr/)
 
-## Deployment
-
-Use the `bin/publish` script to deploy in [GitHub's gh-pages](https://pages.github.com/).
-
 ## Authors
 
 * **Kévin Gomez** - *Initial work*
