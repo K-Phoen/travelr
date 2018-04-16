@@ -30,12 +30,9 @@ build:
 	docker run -it -v $(shell pwd):/usr/src/app -w /usr/src/app --rm node:9 chown -R $(shell id -u):$(shell id -g) dist/
 	./bin/travelr build web
 
-release:
+phar:
 	docker run -it -v $(shell pwd):/usr/src/app -w /usr/src/app --rm node:9 npm run package
 	docker run -it -v $(shell pwd):/usr/src/app -w /usr/src/app --rm node:9 chown -R $(shell id -u):$(shell id -g) dist/
-	./bin/travelr build web
-
-phar: release
 	./vendor/bin/box build
 
 serve:

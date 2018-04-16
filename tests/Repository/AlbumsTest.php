@@ -34,7 +34,7 @@ class AlbumsTest extends TestCase
         $this->repo = new Albums($this->directoriesRepo, $this->thumbnailer);
     }
 
-    public function testItTurnsDirectoriesIntoAlbums()
+    public function testItTurnsDirectoriesIntoAlbums(): void
     {
         $thumbCover = Image::fromPath('web-root/data/dir-path/cover.jpg', 'web-root/data/dir-path/travelr/thumb_cover.jpg');
         $image001 = Image::fromPath('web-root/data/dir-path/image001.jpg', 'web-root/data/dir-path/travelr/thumb_image001.jpg');
