@@ -35,6 +35,10 @@ class Application extends Silly
 
         $this
             ->command('build [--config=] [webroot]', function (string $webRoot, OutputInterface $output, string $config = null): void {
+                if (!is_dir($webRoot)) {
+                    throw new \RuntimeException("Directory '$webRoot' does not exist.");
+                }
+
                 $this->service(Command\AlbumsToJson::class)->run($output, $webRoot, $config);
                 $this->service(Command\BuildAlbumsMapView::class)->run($output, $webRoot);
                 $this->service(Command\BuildGalleries::class)->run($output, $webRoot, $config);
