@@ -20,9 +20,9 @@ directories and use the photos in them to create a map of your travels.
 To generate your website, there are a few steps to follow:
 
 1. Download Travelr
-2. Configure your albums
-3. Generate the website
-4. Deploy!
+2. [Configure your albums](#configuring-the-albums)
+3. [Generate the website](#generating-the-website)
+4. [Deploy!](#deploying)
 
 ### Configuring the albums
 
