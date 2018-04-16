@@ -1,0 +1,74 @@
+[
+    {
+        "slug": "barcelone_2018",
+        "title": "Barcelone \u2013 2018",
+        "description": "blablabla",
+        "thumbnail": "data\/barcelone_2018\/travelr\/thumb_0001.jpg",
+        "latitude": 41.3947688,
+        "longitude": 2.0787284
+    },
+    {
+        "slug": "danemark_2015",
+        "title": "Danemark \u2013 2015",
+        "description": "",
+        "thumbnail": "data\/danemark_2015\/travelr\/thumb_0014.jpg",
+        "latitude": 56.2098058,
+        "longitude": 9.3006526
+    },
+    {
+        "slug": "irlande_06-2016",
+        "title": "Irlande \u2013 06\/2016",
+        "description": "",
+        "thumbnail": "data\/irlande_06-2016\/travelr\/thumb_0032.jpg",
+        "latitude": 53.3623919,
+        "longitude": -10.4597692
+    },
+    {
+        "slug": "irlande_12-2016",
+        "title": "Irlande \u2013 12\/2016",
+        "description": "",
+        "thumbnail": "data\/irlande_12-2016\/travelr\/thumb_0032.jpg",
+        "latitude": 53.3623919,
+        "longitude": -10.4597692
+    },
+    {
+        "slug": "munich_2015",
+        "title": "Munich \u2013 2015",
+        "description": "",
+        "thumbnail": "data\/munich_2015\/travelr\/thumb_0001.jpg",
+        "latitude": 48.1548895,
+        "longitude": 11.4717965
+    },
+    {
+        "slug": "new_york_2014",
+        "title": "New-York \u2013 2014",
+        "description": "",
+        "thumbnail": "data\/new_york_2014\/travelr\/thumb_0060.jpg",
+        "latitude": 40.6974034,
+        "longitude": -74.1197633
+    },
+    {
+        "slug": "norvege_2017",
+        "title": "Norv\u00e8ge \u2013 2017",
+        "description": "",
+        "thumbnail": "data\/norvege_2017\/travelr\/thumb_0002.jpg",
+        "latitude": 64.286782,
+        "longitude": 8.7821307
+    },
+    {
+        "slug": "oleron_2014",
+        "title": "Ol\u00e9ron \u2013 2014",
+        "description": "",
+        "thumbnail": "data\/oleron_2014\/travelr\/thumb_0017.jpg",
+        "latitude": 45.9236976,
+        "longitude": -1.4404717
+    },
+    {
+        "slug": "valence_2018",
+        "title": "Valence \u2013 2018",
+        "description": "",
+        "thumbnail": "data\/valence_2018\/travelr\/thumb_P3240014.jpg",
+        "latitude": 39.4699014,
+        "longitude": -0.3759513
+    }
+]
