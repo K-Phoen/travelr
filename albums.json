@@ -96,6 +96,14 @@
         "longitude": 10.7391112
     },
     {
+        "slug": "stockholm_2018",
+        "title": "Stockholm \u2013 2018",
+        "description": "",
+        "thumbnail": "data\/stockholm_2018\/travelr\/thumb_P5300019.JPG",
+        "latitude": 59.3251172,
+        "longitude": 18.0710935
+    },
+    {
         "slug": "valence_2018",
         "title": "Valence \u2013 2018",
         "description": "",
