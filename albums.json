@@ -104,6 +104,14 @@
         "longitude": 18.0710935
     },
     {
+        "slug": "tallinn_2018",
+        "title": "Tallinn \u2013 2018",
+        "description": "",
+        "thumbnail": "data\/tallinn_2018\/travelr\/thumb_IMG_20180602_145645.jpg",
+        "latitude": 59.4372155,
+        "longitude": 24.7453688
+    },
+    {
         "slug": "valence_2018",
         "title": "Valence \u2013 2018",
         "description": "",
