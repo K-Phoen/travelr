@@ -96,6 +96,14 @@
         "longitude": 10.7391112
     },
     {
+        "slug": "riga_2018",
+        "title": "Riga \u2013 2018",
+        "description": "",
+        "thumbnail": "data\/riga_2018\/travelr\/thumb_P6050038.JPG",
+        "latitude": 56.9493977,
+        "longitude": 24.1051846
+    },
+    {
         "slug": "stockholm_2018",
         "title": "Stockholm \u2013 2018",
         "description": "",
