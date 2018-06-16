@@ -126,5 +126,21 @@
         "thumbnail": "data\/valence_2018\/travelr\/thumb_P3240014.jpg",
         "latitude": 39.4699014,
         "longitude": -0.3759513
+    },
+    {
+        "slug": "vilnius_2018",
+        "title": "Vilnius \u2013 2018",
+        "description": "",
+        "thumbnail": "data\/vilnius_2018\/travelr\/thumb_IMG_20180608_182502.jpg",
+        "latitude": 54.6870458,
+        "longitude": 25.2829111
+    },
+    {
+        "slug": "warsaw_2018",
+        "title": "Warsaw \u2013 2018",
+        "description": "",
+        "thumbnail": "data\/warsaw_2018\/travelr\/thumb_P6140088.JPG",
+        "latitude": 52.2319237,
+        "longitude": 21.0067265
     }
 ]
