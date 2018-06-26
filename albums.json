@@ -16,6 +16,14 @@
         "longitude": 5.3258117
     },
     {
+        "slug": "berlin_2018",
+        "title": "Berlin \u2013 2018",
+        "description": "",
+        "thumbnail": "data\/berlin_2018\/travelr\/thumb_IMG_20180622_174434.jpg",
+        "latitude": 52.5170365,
+        "longitude": 13.3888599
+    },
+    {
         "slug": "danemark_2015",
         "title": "Danemark \u2013 2015",
         "description": "",
