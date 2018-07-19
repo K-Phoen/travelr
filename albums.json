@@ -88,6 +88,14 @@
         "longitude": 19.9368564
     },
     {
+        "slug": "lviv_2018",
+        "title": "Lviv \u2013 2018",
+        "description": "",
+        "thumbnail": "data\/lviv_2018\/travelr\/thumb_IMG_20180714_154906.jpg",
+        "latitude": 49.841952,
+        "longitude": 24.0315921
+    },
+    {
         "slug": "munich_2015",
         "title": "Munich \u2013 2015",
         "description": "",
@@ -126,6 +134,14 @@
         "thumbnail": "data\/oslo_2018\/travelr\/thumb_P5200016.JPG",
         "latitude": 59.9132694,
         "longitude": 10.7391112
+    },
+    {
+        "slug": "prague_2018",
+        "title": "Prague \u2013 2018",
+        "description": "",
+        "thumbnail": "data\/prague_2018\/travelr\/thumb_P6260013.JPG",
+        "latitude": 50.0874654,
+        "longitude": 14.4212535
     },
     {
         "slug": "riga_2018",
