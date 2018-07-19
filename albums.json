@@ -190,5 +190,13 @@
         "thumbnail": "data\/warsaw_2018\/travelr\/thumb_P6140088.JPG",
         "latitude": 52.2319237,
         "longitude": 21.0067265
+    },
+    {
+        "slug": "zdiar_2018",
+        "title": "\u017ddiar \u2013 2018",
+        "description": "",
+        "thumbnail": "data\/zdiar_2018\/travelr\/thumb_IMG_20180709_142507.jpg",
+        "latitude": 49.2695199,
+        "longitude": 20.2645742
     }
 ]
