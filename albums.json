@@ -24,6 +24,14 @@
         "longitude": 13.3888599
     },
     {
+        "slug": "bratislava_2018",
+        "title": "Bratislava \u2013 2018",
+        "description": "",
+        "thumbnail": "data\/bratislava_2018\/travelr\/thumb_P7010080.JPG",
+        "latitude": 48.1359085,
+        "longitude": 17.1597440625
+    },
+    {
         "slug": "danemark_2015",
         "title": "Danemark \u2013 2015",
         "description": "",
