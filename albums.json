@@ -80,6 +80,14 @@
         "longitude": -10.4597692
     },
     {
+        "slug": "kiev_2018",
+        "title": "Kiev \u2013 2018",
+        "description": "",
+        "thumbnail": "data\/kiev_2018\/travelr\/thumb_P7190037.JPG",
+        "latitude": 50.4501071,
+        "longitude": 30.5240501
+    },
+    {
         "slug": "krakow_2018",
         "title": "Krak\u00f3w \u2013 2018",
         "description": "",
@@ -166,6 +174,14 @@
         "thumbnail": "data\/tallinn_2018\/travelr\/thumb_IMG_20180602_145645.jpg",
         "latitude": 59.4372155,
         "longitude": 24.7453688
+    },
+    {
+        "slug": "tchernobyl_2018",
+        "title": "Tchernobyl \u2013 2018",
+        "description": "",
+        "thumbnail": "data\/tchernobyl_2018\/travelr\/thumb_P7180050.JPG",
+        "latitude": 51.2705259,
+        "longitude": 30.2194322
     },
     {
         "slug": "valence_2018",
