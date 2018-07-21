@@ -42,9 +42,11 @@ class Application extends Silly
                 switch ($type) {
                     case 'album':
                         $config = new AlbumConfiguration();
+
                         break;
                     case 'global':
                         $config = new GlobalConfiguration();
+
                         break;
                     default:
                         throw new \LogicException(sprintf('Unknown config type "%s". Known values: album, global.', $type));
